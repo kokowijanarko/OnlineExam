@@ -103,7 +103,7 @@ else{
 	
 	<div class="collapsed" style="margin-bottom:15px;">
 		<span id="round1">Hasil Ujian</span>
-		<a href="bank_ri32.php">
+		<a href="admin-home.php?page=exam_result">
 		<img src="images/images_admin/img_admin_arrow.png" border="0" /> Hasil ujian
 		</a>
 		
