@@ -63,6 +63,7 @@ echo"
 include "koneksi.php";
 
        if(isset($_POST['submit'])){
+		   var_dump($_POST);
 			$pilihan=$_POST["pilihan"];
 			$id_soal=$_POST["id"];
 			$jumlah=$_POST['jumlah'];
@@ -74,9 +75,7 @@ include "koneksi.php";
 			
 			for ($i=0;$i<$jumlah;$i++){
 				//id nomor soal
-				$nomor=$id_soal[$i];
-				
-				
+				$nomor=$id_soal[$i];			
 				//jika user tidak memilih jawaban
 				if (empty($pilihan[$nomor])){
 					$kosong++;
@@ -99,8 +98,10 @@ include "koneksi.php";
 						$salah++;
 					}
 					
-				} 
-				$score = $benar*4;
+				}
+				
+				$score = $benar*(100/$jumlah);
+				//var_dump($score);
 			}
 		}
 		?>
@@ -119,6 +120,13 @@ include "koneksi.php";
         <input type="hidden" name="kosong" value="<?php echo $kosong;?>" />
         <input type="hidden" name="point" value="<?php echo $score;?>" />
         <input type="hidden" name="mapel_id" value="<?php echo $_POST['mapel_id'];?>" />
+        <input type="hidden" name="jumlah" value="<?php echo $_POST['jumlah'];?>" />
+		<?php
+			for ($i=0;$i<$jumlah;$i++){
+				echo ' <input type="text" name="soal_id[]" value="'.$_POST['id'][$i].'" />';
+				echo ' <input type="text" name="jawaban['.$_POST['id'][$i].']" value="'.$_POST['pilihan'][$_POST['id'][$i]].'" />';
+			}
+		?>
 		
         <input type="submit" name="submit" value="Simpan Nilai" onClick="return confirm('Apakah Anda yakin akan menyimpan nilai ujian?')"/>
         

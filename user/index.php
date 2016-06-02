@@ -39,8 +39,8 @@ return (true);
   <img src="../admin/images/images_login/img_login_user.png" align="absmiddle" class="img_user" />
   <input type="text" name="username" size="29" id="input" placeholder="NIM"/>
   <br />
-  <input type="password" name="password" size="29" id="pass" placeholder="Password" />
-	</br>
+  <img src="../admin/images/images_login/img_login_lock.png" align="absmiddle" class="img_user" />
+  <input type="text" name="password" size="29" id="input" placeholder="PASSWORD"/>
   
   
   <input name="Submit" type="image" value="Submit" src="../admin/images/images_login/button_login.png" id="submit" align="absmiddle" />
