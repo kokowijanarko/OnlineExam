@@ -11,17 +11,30 @@ error_reporting(0);
 <?php
 $conf 	   = mysql_query("select * from mini_config");
 $view_conf = mysql_fetch_array($conf);
+$query=mysql_query("select * from soal where mapel_id= '".$_GET['id']."'LIMIT 30");
+$jumlah_soal=mysql_num_rows($query);
 ?>
 <html>
 <head>
 <title>::Test Ujian Online::.</title>
 
 <link rel="stylesheet" type="text/css" href="files/style_admin.css" />
+<style>
+	.hide{
+		visibility: hidden;
+	}
+	.collapse{
+		visibility: collapse;
+	}
+</style>
+
+
 <script src="../asset/js/jquery.2.1.1.min.js" type="text/javascript"></script>
 <script src="files/sdmenu.js" type="text/javascript"></script>
 <script src="files/tiny_mce.js" type="text/javascript"></script>
 <script src="files/tiny_miniw0rm.js" type="text/javascript"></script>
 <script src="../asset/js/jquery.countdown.js" type="text/javascript"></script>
+
 
 
 <script type="text/javascript">
@@ -30,9 +43,45 @@ $view_conf = mysql_fetch_array($conf);
 	window.onload = function() {
 	myMenu = new SDMenu("my_menu");
 	myMenu.init();
-		$('#clock').countdown('2020/10/10', function(event) {
-			$(this).html(event.strftime('%H:%M:%S'));
-			
+		var fiveSeconds = new Date().getTime() + 5000;		
+		$('#clock').countdown(fiveSeconds, {elapse: true, finalDate: fiveSeconds})
+		.on('update.countdown', function(event){
+			var $this = $(this);
+			if (event.elapsed) {
+				//$this.html(event.strftime('After end: <span>%H:%M:%S</span>'));				
+				// var mapel_id = $('input[name=mapel_id]').val();
+				// var jumlah = $('input[name=jumlah]').val();
+				// var idx = 0;
+				// var id = [];
+				// var jawaban= [];
+				// var params = {
+					// 'mapel_id':mapel_id,
+					// 'jumlah':jumlah,
+					// 'id':id,
+					// 'pilihan':jawaban
+					
+				// };			
+				// var asd = $('#id[1]').val()
+				// console.log(asd);
+				// $('input[name=id]').each(function(index) {
+					// console.log(index);
+					// id.push($(this).val());
+					// $('radio[name:pilihan]').each(function(){
+						// jawaban.push($(this).val());
+					// });					
+					// idx++;
+				// });
+				//console.log(params);
+				// $.Ajax({
+					// url:'nilai.php',
+					// method:'post',
+					// data:params
+				// });
+				$('#submit-button').removeClass('collapse');
+				$('#form_soal').addClass('collapse');
+			} else {
+				$this.html(event.strftime('To end: <span>%H:%M:%S</span>'));
+			}
 		});
 	
 	
@@ -104,7 +153,8 @@ echo'
 
 <form action='nilai.php' method='post' id="form-area" onSubmit="return validasi_input(this)">
 <input type="hidden" value="<?php echo $_GET['id']?>" name="mapel_id">
-<ol>
+
+<table id="form_soal" width="650" border="0" class="font" >
   <?php
 		$hasil=mysql_query("select * from soal where mapel_id= '".$_GET['id']."'LIMIT 30");
 		$jumlah=mysql_num_rows($hasil);
@@ -120,10 +170,8 @@ echo'
 			
 			?>
 		
-			<input type="hidden" name="id[]" value=<?php echo $id; ?>>
+			<input type="hidden" id="id[]" name="id[]" value=<?php echo $id; ?>>
 			<input type="hidden" name="jumlah" value=<?php echo $jumlah; ?>>
-			
-			<table width="650" border="0" class="font" >
 			<tr>
 			  	<td width="17"><font color="#FFFFFF"><?php echo $urut=$urut+1; ?></font></td>
 			  	<td width="430"><font color="#FFFFFF"><strong><?php echo "$pertanyaan"; ?></strong></font></td>
@@ -144,14 +192,15 @@ echo'
 				<td>&nbsp;</td>
 			  	<td><input name="pilihan[<?php echo $id; ?>]" type="radio" value="d"> <font color="#FFFFFF"><?php echo "D. $pilihan_d";?></font> </td>
             </tr>
-			</table>
+			
 		<?php
 		}
 		?>
-        	<tr>
-				<td>&nbsp;</td>
-			  	<td><input type="submit" name="submit" value="Jawab" )"></td>
-            </tr>
+			</table>
+        	<div id="submit-button" class="collapse">
+				<input type="submit" name="submit" value="Waktu Habis Klik Untuk Submit Jawaban Anda">
+            </div>
+			
 		</form>
         </p>
 
