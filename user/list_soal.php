@@ -17,22 +17,28 @@ $view_conf = mysql_fetch_array($conf);
 <title>::Test Ujian Online::.</title>
 
 <link rel="stylesheet" type="text/css" href="files/style_admin.css" />
-
-<script src="files/jquery.js" type="text/javascript"></script>
+<script src="../asset/js/jquery.2.1.1.min.js" type="text/javascript"></script>
 <script src="files/sdmenu.js" type="text/javascript"></script>
-<script src="tinymce/jscripts/tiny_mce/tiny_mce.js" type="text/javascript"></script>
-<script src="tinymce/jscripts/tiny_mce/tiny_miniw0rm.js" type="text/javascript"></script>
+<script src="files/tiny_mce.js" type="text/javascript"></script>
+<script src="files/tiny_miniw0rm.js" type="text/javascript"></script>
+<script src="../asset/js/jquery.countdown.js" type="text/javascript"></script>
+
 
 <script type="text/javascript">
 	var myMenu;
+	
 	window.onload = function() {
 	myMenu = new SDMenu("my_menu");
 	myMenu.init();
+		$('#clock').countdown('2020/10/10', function(event) {
+			$(this).html(event.strftime('%H:%M:%S'));
+			
+		});
+	
+	
 	};
-</script>
-
-<script type="text/javascript">
-function validasi_input(form){
+	
+	function validasi_input(form){
   function check_radio(radio)
   {
 // memeriksa apakah radio button sudah ada yang dipilih
@@ -54,7 +60,11 @@ function validasi_input(form){
     }
    return (true);
 }
+	
+	
 </script>
+
+
 </head>
 
 <body>
@@ -87,7 +97,11 @@ echo'
 <div id="title_content">
 <img src="images/images_admin/icon_admin_user.png" align="absmiddle" class="img_title" /> Soal '.$mapel_name.'
 </div>';
+
 ?>
+<div id="clock">
+</div>
+
 <form action='nilai.php' method='post' id="form-area" onSubmit="return validasi_input(this)">
 <input type="hidden" value="<?php echo $_GET['id']?>" name="mapel_id">
 <ol>
