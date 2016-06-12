@@ -53,10 +53,13 @@ $view_conf = mysql_fetch_array($conf);
 <!-- Content Right -->
 
 <?php
+$query = mysql_query('SELECT mapel_name FROM mapel WHERE mapel_id='.$_GET['mapel']);
+$result = mysql_fetch_row($query);
+$mapel_name = $result[0];
 echo"
 <div id=\"content\" style=\"height:autopx\">
 <div id=\"title_content\">
-<img src=\"images/images_admin/icon_admin_user.png\" align=\"absmiddle\" class=\"img_title\" /> Soal Kuantitatif
+<img src=\"images/images_admin/icon_admin_user.png\" align=\"absmiddle\" class=\"img_title\" /> Mata Pelajaran " .$mapel_name."
 </div>";
 ?>
 <?php

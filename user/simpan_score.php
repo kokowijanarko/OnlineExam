@@ -1,9 +1,7 @@
 <div>
-
-	
 	<?php
 	include "koneksi.php";
-	if(isset($_POST['submit'])){
+	if(isset($_POST)){
 		var_dump($_POST);
 		$id_user=$_POST['username'];
 		$benar=$_POST['benar'];
@@ -13,8 +11,26 @@
 		$mapel=$_POST['mapel_id'];
 		$tanggal=date("Y-m-d");
 		
-		$query=mysql_query("insert into score 
-		(score_nim, score_mapel_id, score_score) values('".$id_user."', '".$mapel."', '".$point."')");
+		$query=mysql_query("
+			insert into score 
+			(
+				score_nim, 
+				score_mapel_id, 
+				score_score, 
+				score_answer_false, 
+				score_answer_true, 
+				score_answer_empty
+			)
+			values
+			(
+				'".$id_user."', 
+				'".$mapel."', 
+				'".$point."',
+				'".$salah."',
+				'".$benar."',
+				'".$kososng."'
+			)
+		");
 		
 		//insert_detail_jawaban
 		$id_score = mysql_insert_id();
@@ -36,11 +52,11 @@
 		
 		//var_dump($batch);
 		
-		die;
+		
 		if($query){
-			?><script language="javascript">document.location.href='status.php?message=success'</script><?php
-		}else{ ?>
-			<script language="javascript">document.location.href='status.php?message=failed'</script><?php
+			header('location:status.php?message=success&mapel='.$mapel);
+		}else{
+			header('location:status.php?message=failed&mapel='.$mapel);
 		}
 		
 	}

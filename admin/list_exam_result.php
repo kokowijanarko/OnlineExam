@@ -89,7 +89,7 @@ foreach($data as $r){
 				<td>'.$r['nama_mapel'].'</td>
 				<td>'.$r['score'].'</td>
 				<td>
-					<a href="admin-home.php?page=exam_resul&id='.$r['id_nilai'].'" class="action">
+					<a href="admin-home.php?page=exam_result&id='.$r['id_nilai'].'" class="action">
 						<img src="images/images_admin/icon_admin_post.png" align="absmiddle" class="img_detail" width="20px" />
 						Detail
 					</a>

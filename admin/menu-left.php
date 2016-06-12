@@ -46,18 +46,6 @@ else{
 	</div>
 	<div class="collapsed" style="margin-bottom:15px;">
 		<span id="round1">Input Soal</span>	
-		<a href="inputsoalanalisa.php">
-		<img src="images/images_admin/img_admin_arrow.png" border="0" /> Kemampuan Analisa
-		</a>
-		
-		<a href="inputsoalagama.php">
-		<img src="images/images_admin/img_admin_arrow.png" border="0" /> Kemampuan Agama
-		</a>
-		
-		<a href="inputsoalinggris.php">
-		<img src="images/images_admin/img_admin_arrow.png" border="0" /> Bahasa Inggris
-		</a>
-		
 		<?php
 			$query = mysql_query('SELECT * FROM mapel');
 			//var_dump($query);
@@ -76,15 +64,6 @@ else{
 	
 	<div class="collapsed" style="margin-bottom:15px;">
 		<span id="round1">Daftar Soal</span>
-		<a href="admin-home.php?page=listsoalanalisa">
-		<img src="images/images_admin/img_admin_arrow.png" border="0" /> Kemampuan Analisa
-		</a>
-		<a href="admin-home.php?page=listsoalagama">
-		<img src="images/images_admin/img_admin_arrow.png" border="0" /> Kemampuan Agama
-		</a>
-		<a href="admin-home.php?page=listsoalinggris">
-		<img src="images/images_admin/img_admin_arrow.png" border="0" /> Bahasa Inggris
-		</a>
 		<?php
 			$query = mysql_query('SELECT * FROM mapel');
 			//var_dump($query);

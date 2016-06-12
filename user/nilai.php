@@ -61,17 +61,17 @@ echo"
 ?>
 <?php
 include "koneksi.php";
-
+		$score=0;
+		$benar=0;
+		$salah=0;
+		$kosong=0;
        if(isset($_POST['submit'])){
-		   var_dump($_POST);
+		   //var_dump($_POST);
 			$pilihan=$_POST["pilihan"];
 			$id_soal=$_POST["id"];
 			$jumlah=$_POST['jumlah'];
 			
-			$score=0;
-			$benar=0;
-			$salah=0;
-			$kosong=0;
+			
 			
 			for ($i=0;$i<$jumlah;$i++){
 				//id nomor soal
@@ -108,10 +108,18 @@ include "koneksi.php";
         <form action="simpan_score.php" method="post" id="form-area">
 		
 		<?php 
-		if($kosong==0){
-		echo " Terimakasih Anda Sudah Menjawab Semua Soal Silahkan Simpan Soal";
-		}else{ echo "Anda Belum Menjawab $kosong Soal <a href='soalinggris.php'> <blink><strong>silahkan isi kembali soal</strong></blink></a> atau Simpan";
-		} 
+		
+			$view_score = ($score <= 0)?0:$score;
+			echo "Score Anda <b>".$view_score."</b> (Skala 100)";
+			echo '
+				<ul>
+					<li>Jawaban Benar <b>'.$benar.'</b></li>
+					<li>Jawaban Salah <b>'.$salah.'</b></li>
+					<li>Jawaban Kosong <b>'.$kosong.'</b></li>
+				</ul>
+			
+			';
+		
 		?>
         
         <input type="hidden" name="username" value="<?php echo $_SESSION['username']?>" />
@@ -123,12 +131,12 @@ include "koneksi.php";
         <input type="hidden" name="jumlah" value="<?php echo $_POST['jumlah'];?>" />
 		<?php
 			for ($i=0;$i<$jumlah;$i++){
-				echo ' <input type="text" name="soal_id[]" value="'.$_POST['id'][$i].'" />';
-				echo ' <input type="text" name="jawaban['.$_POST['id'][$i].']" value="'.$_POST['pilihan'][$_POST['id'][$i]].'" />';
+				echo ' <input type="hidden" name="soal_id[]" value="'.$_POST['id'][$i].'" />';
+				echo ' <input type="hidden" name="jawaban['.$_POST['id'][$i].']" value="'.$_POST['pilihan'][$_POST['id'][$i]].'" />';
 			}
 		?>
 		
-        <input type="submit" name="submit" value="Simpan Nilai" onClick="return confirm('Apakah Anda yakin akan menyimpan nilai ujian?')"/>
+        <input type="submit" name="hidden" value="Simpan Nilai" />
         
         </form> 
 		

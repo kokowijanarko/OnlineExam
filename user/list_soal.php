@@ -48,7 +48,7 @@ $jumlah_soal=mysql_num_rows($query);
 		.on('update.countdown', function(event){
 			var $this = $(this);
 			if (event.elapsed) {
-				//$this.html(event.strftime('After end: <span>%H:%M:%S</span>'));				
+				$this.html('Waktu Habis');				
 				// var mapel_id = $('input[name=mapel_id]').val();
 				// var jumlah = $('input[name=jumlah]').val();
 				// var idx = 0;
@@ -80,7 +80,7 @@ $jumlah_soal=mysql_num_rows($query);
 				$('#submit-button').removeClass('collapse');
 				$('#form_soal').addClass('collapse');
 			} else {
-				$this.html(event.strftime('To end: <span>%H:%M:%S</span>'));
+				$this.html(event.strftime('Siswa Waktu: <span>%H:%M:%S</span>'));
 			}
 		});
 	
