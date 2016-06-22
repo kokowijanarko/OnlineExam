@@ -49,47 +49,21 @@ $view_conf = mysql_fetch_array($conf);
 
 <?php
 echo"
-<div id=\"\" style=\"height:650px\">
-<div id=\"\">
-<img src=\"admin/images/images_admin/icon_admin_user.png\" align=\"absmiddle\" class=\"img_title\" /> <font size=\"5px\" color=\"white\">REGISTRATION</font><br>
-
+<div>
+	<div id=\"\" style=\"height:100px\">
+		<a href='register.php'>
+			<img src=\"admin/images/images_admin/icon_admin_user.png\" align=\"absmiddle\" class=\"img_title\" />
+		</a>
+		<font size=\"5px\" color=\"white\">REGISTRASI</font><br>
+	</div>
+	
+	<div id=\"\" style=\"height:100px\">
+		<a href='user/'>
+			<img src=\"admin/images/images_admin/icon_admin_user.png\" align=\"absmiddle\" class=\"img_title\" />
+		</a>
+		<font size=\"5px\" color=\"white\">SUDAH PUNYA AKUN</font><br>
+	</div>
 </div>
-<a href ='loginsiswa.php'> I Have Acoount. </a>
-";
- if (!empty($_GET['message']) && $_GET['message'] == 'success') {
-                echo '<h3>Berhasil menambah data!</h3>';
-            }
-			
-echo "
-<form action=\"insertuser.php\" method=\"post\" id=\"form-area\" style=\"width:400px;\">
-<div style=\"width:100px\" id=\"form-label\">No Peserta</div>
-<input type=\"text\" name=\"nopeserta\" id=\"form-input\" required=\"required\" size=\"40\" />
-<br />
-
-<div style=\"width:100px\" id=\"form-label\">Nama</div>
-<input type=\"text\" name=\"nama\" id=\"form-input\" required=\"required\" size=\"40\" />
-<br />
-
-<div style=\"width:100px\" id=\"form-label\">Program Keahlan</div>
-<select name=\"kelas\" id=\"form-input\">
-
-    <option value=\"IPA\">Ilmu Pengetahuan Alam</option>
-    <option value=\"IPS\">Ilmu Pengetahuan Sosial</option>
-
-</select>
-<br />
-
-<div style=\"width:100px\" id=\"form-label\">No Telepon</div>
-<input type=\"text\" name=\"telepon\" id=\"form-input\" required=\"required\" size=\"40\" />
-<br />
-
-<div style=\"width:100px\" id=\"form-label\">Password</div>
-<input type=\"password\" name=\"password\" id=\"form-input\" required=\"required\" size=\"40\" />
-<br />
-<input type=\"submit\" name=\"Submit\" value=\"REGISTER\" id=\"form-submit\" style=\"margin-bottom:5px\"/>
-</form>
-</div>
-
 ";
 ?>
 

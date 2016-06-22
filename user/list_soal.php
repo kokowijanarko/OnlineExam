@@ -41,8 +41,9 @@ $jumlah_soal=mysql_num_rows($query);
 	var myMenu;
 	
 	window.onload = function() {
-	myMenu = new SDMenu("my_menu");
-	myMenu.init();
+		myMenu = new SDMenu("my_menu");
+		myMenu.init();
+		
 		var fiveSeconds = new Date().getTime() + 5000;		
 		$('#clock').countdown(fiveSeconds, {elapse: true, finalDate: fiveSeconds})
 		.on('update.countdown', function(event){

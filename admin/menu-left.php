@@ -40,7 +40,7 @@ else{
 		<a href="input_soal_mapel_baru.php">
 			<img src="images/images_admin/img_admin_arrow.png" border="0" /> Mata Pelajaran Baru
 		</a>
-		<a href="input_soal_mapel_baru.php">
+		<a href="list_mapel.php">
 			<img src="images/images_admin/img_admin_arrow.png" border="0" /> Daftar Mata Pelajaran
 		</a>
 	</div>

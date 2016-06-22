@@ -22,15 +22,15 @@ SDMenu.prototype.init = function() {
 				break;
 			}
 	}
-	if (this.remember) {
-		var regex = new RegExp("sdmenu_" + encodeURIComponent(this.menu.id) + "=([01]+)");
-		var match = regex.exec(document.cookie);
-		if (match) {
-			var states = match[1].split("");
-			for (var i = 0; i < states.length; i++)
-				this.submenus[i].className = (states[i] == 0 ? "collapsed" : "");
-		}
-	}
+	// if (this.remember) {
+		// var regex = new RegExp("sdmenu_" + encodeURIComponent(this.menu.id) + "=([01]+)");
+		// var match = regex.exec(document.cookie);
+		// if (match) {
+			// var states = match[1].split("");
+			// for (var i = 0; i < states.length; i++)
+				// this.submenus[i].className = (states[i] == 0 ? "collapsed" : "");
+		// }
+	// }
 };
 SDMenu.prototype.toggleMenu = function(submenu) {
 	if (submenu.className == "collapsed")
