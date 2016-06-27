@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="files/style_table.css" />
 <?php
 session_start();
 if(!empty($_SESSION[username]) || !empty($_SESSION[username])) {
@@ -47,16 +48,20 @@ JOIN mapel c ON c.`mapel_id` = a.`score_mapel_id`
 LIMIT $posisi,$batas");
 
 echo '
+	<div class="datagrid">
 	<table width = "100%">
+		<thead>
 		<tr>
 			<th>NO</th>
 			<th>NIS</th>
 			<th>NAMA</th>
 			<th>KELAS</th>
 			<th>MATA PELAJARAN</th>
-			<th>NILAI</th>
+			<th colspan="2">NILAI</th>
 			<th>AKSI</th>			
 		</tr>
+		</thead>
+		<tbody>
 ';
 $no=1;
 
@@ -80,6 +85,10 @@ for($i = $posisi; $i <= ($batas + $posisi); $i++ ){
 //var_dump($number, $posisi, $batas);
 $i=0;
 foreach($data as $r){
+	$sql_detail_mapel = mysql_query("SELECT * FROM mapel where mapel_id=".$r['id_mapel']);
+	$mapel_detail = mysql_fetch_assoc($sql_detail_mapel);
+	$conclusion = $result_identitas['score'] >= $mapel_detail['mapel_pass_score'] ? "LULUS" : "TIDAK LULUS";
+
 	echo'
 			<tr>
 				<td>'.$number[$i].'</td>
@@ -88,6 +97,7 @@ foreach($data as $r){
 				<td>'.$r['nama_kelas'].'</td>
 				<td>'.$r['nama_mapel'].'</td>
 				<td>'.$r['score'].'</td>
+				<td>'.$conclusion.'</td>
 				<td>
 					<a href="admin-home.php?page=exam_result&id='.$r['id_nilai'].'" class="action">
 						<img src="images/images_admin/icon_admin_post.png" align="absmiddle" class="img_detail" width="20px" />
@@ -105,7 +115,7 @@ $jmldata=mysql_num_rows(mysql_query("SELECT * FROM score"));
 $jmlhalaman  = $p->jumlahHalaman($jmldata, $batas);
 $linkHalaman = $p->navHalaman($_GET[halaman], $jmlhalaman);
 echo "<div id=\"pagging\">$linkHalaman</div>";
-echo "</tabel>";
+echo "</body></tabel></div>";
 echo "</div>";
 break;
 

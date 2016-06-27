@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="files/style_table.css" />
 <?php
 session_start();
 if(!empty($_SESSION[username]) || !empty($_SESSION[username])) {
@@ -75,8 +76,13 @@ $sql_identitas	 = mysql_query("
 	WHERE a.`score_id` = '".$id."'
 ");
 $result_identitas = mysql_fetch_assoc($sql_identitas);
-//var_dump($result_identitas);
+//var_dump($result_identitas);die;
+$sql_detail_mapel = mysql_query("SELECT * FROM mapel where mapel_id=".$result_identitas['id_mapel']);
+$mapel_detail = mysql_fetch_assoc($sql_detail_mapel);
+//var_dump($mapel_detail);die;
+$conclusion = $result_identitas['score'] >= $mapel_detail['mapel_pass_score'] ? "LULUS" : "TIDAK LULUS";
 echo'
+
 	<table>
 		<tr>
 			<td>Nama</td>
@@ -116,14 +122,16 @@ echo'
 		<tr>
 			<td>Nilai</td>
 			<td>:</td>
-			<td>'.$result_identitas['score'].'</td>
+			<td>'.$result_identitas['score'].' - <b>('.$conclusion.')</b></td>
 		</tr>
 		
 	</table>
+	</br>
 ';
-
 echo '
-	<table width = "100%">
+	<div class="datagrid">
+	<table>
+	<thead>
 		<tr>
 			<th width="5%">NO</th>
 			<th width="35%">Soal</th>
@@ -132,6 +140,8 @@ echo '
 			<th>Jawaban</th>
 			<th>Kesimpulan</th>		
 		</tr>
+	</thead>
+	<tbody>
 ';
 $no=1;
 
@@ -173,7 +183,7 @@ foreach($data as $r){
 	';
 	$i++;
 }
-echo "</tabel>";
+echo "</tbody></tabel></div>";
 echo "</div>";
 break;
 }
