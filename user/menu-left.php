@@ -1,6 +1,8 @@
 <?php
 session_start();
 if(empty($_SESSION['username']) || empty($_SESSION['username'])) {
+	
+$nim = $_SESSION['username'];
 include "error/error-access-denied-page.php";
 }else{
 if ($_SESSION['typeuser']=='admin'){
@@ -28,16 +30,7 @@ else{
 	<!-- Post Menu -->
 	
 	<div class="collapsed" style="margin-bottom:15px;">
-		<span id="round1">Daftar Soal</span>
-		<a href="admin-home.php?page=listsoalanalisa">
-		<img src="images/images_admin/img_admin_arrow.png" border="0" /> Kemampuan Analisa
-		</a>
-		<a href="admin-home.php?page=listsoalagama">
-		<img src="images/images_admin/img_admin_arrow.png" border="0" /> Kemampuan Agama
-		</a>
-		<a href="admin-home.php?page=listsoalinggris">
-		<img src="images/images_admin/img_admin_arrow.png" border="0" /> Bahasa Inggris
-		</a>
+		<span id="round1">Daftar Soal</span>		
 		<?php
 			$query = mysql_query('SELECT * FROM mapel');
 			//var_dump($query);
@@ -46,6 +39,31 @@ else{
 				echo '
 					<a href="list_soal.php?id='.$mpl['mapel_id'].'">
 						<img src="images/images_admin/img_admin_arrow.png" border="0" />'.$mpl['mapel_name'].'
+					</a>
+				';
+			}
+			
+		?>
+	</div>
+	
+	<div class="collapsed" style="margin-bottom:15px;">
+		<span id="round1">Hasil Ujian</span>		
+		<?php
+			$query_score = mysql_query("
+				SELECT
+					a.`score_id`,
+					a.`score_mapel_id`,
+					b.`mapel_name`
+				FROM score a 
+				JOIN mapel b ON b.`mapel_id` = a.`score_mapel_id`
+				WHERE a.`score_nim` = $nim
+			");
+			//var_dump($query);
+			//$mapel = mysql_fetch_array($query);
+			while($scr = mysql_fetch_array($query_score)){			
+				echo '
+					<a href="user-home.php?page=exam_result&id='.$scr['score_id'].'">
+						<img src="images/images_admin/img_admin_arrow.png" border="0" />'.$scr['mapel_name'].'
 					</a>
 				';
 			}

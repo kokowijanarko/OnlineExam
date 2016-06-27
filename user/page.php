@@ -49,9 +49,9 @@ include "datapegawai.php";
 // Cari Pegawai
 else if($_GET['page']=="caripegawai"){
 include "caripegawai.php";
-}
-
-else{
+}elseif($_GET['page']=="exam_result" && isset($_GET['id'])){
+	include "detail_exam_result.php";
+}else{
 include "home.php";
 }
 

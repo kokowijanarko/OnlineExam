@@ -13,6 +13,12 @@ $conf 	   = mysql_query("select * from mini_config");
 $view_conf = mysql_fetch_array($conf);
 $query=mysql_query("select * from soal where mapel_id= '".$_GET['id']."'LIMIT 30");
 $jumlah_soal=mysql_num_rows($query);
+
+$sql_detail_mapel = mysql_query("SELECT * FROM mapel where mapel_id=".$_GET['id']);
+$mapel_detail = mysql_fetch_assoc($sql_detail_mapel);
+$time_exam = $mapel_detail['mapel_duration'];
+$time_exam = (intval($time_exam)*60) * 1000;
+
 ?>
 <html>
 <head>
@@ -43,8 +49,10 @@ $jumlah_soal=mysql_num_rows($query);
 	window.onload = function() {
 		myMenu = new SDMenu("my_menu");
 		myMenu.init();
+		//var duration = 5400000;
+		var duration = parseInt('<?php echo $time_exam?>');
 		
-		var fiveSeconds = new Date().getTime() + 5000;		
+		var fiveSeconds = new Date().getTime() + duration;		
 		$('#clock').countdown(fiveSeconds, {elapse: true, finalDate: fiveSeconds})
 		.on('update.countdown', function(event){
 			var $this = $(this);
