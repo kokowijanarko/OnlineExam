@@ -2,6 +2,21 @@
 session_start();
 include "../koneksi.php";
 
+$id = !empty($_GET['id'])?$_GET['id']:'0';
+$sql_detail_user = mysql_query('SELECT * FROM member WHERE Id='.$id) or die(mysql_error);
+$detail_user = mysql_fetch_assoc($sql_detail_user);
+$judul = 'INPUT USER BARU';
+if($detail_user){
+	if(!empty($detail_user)){
+		$nama = $detail_user['nama'];
+		$email = $detail_user['email'];
+		$password = $detail_user['password'];
+		$divisi = $detail_user['divisi'];
+	}
+	
+	$judul = 'EDIT USER';
+}
+
 ?>
 
 <?php 
@@ -56,7 +71,7 @@ $view_conf = mysql_fetch_array($conf);
 echo"
 <div id=\"content\" style=\"height:650px\">
 <div id=\"title_content\">
-<img src=\"images/images_admin/icon_admin_user.png\" align=\"absmiddle\" class=\"img_title\" /> Input User Baru
+<img src=\"images/images_admin/icon_admin_user.png\" align=\"absmiddle\" class=\"img_title\" /> $judul
 </div>
 ";
  if (!empty($_GET['message']) && $_GET['message'] == 'success') {
@@ -66,19 +81,20 @@ echo"
 echo "
 <form action=\"insertuser.php\" method=\"post\" id=\"form-area\" style=\"width:385px;\">
 <div style=\"width:90px\" id=\"form-label\">Nama</div>
-<input type=\"text\" name=\"nama\" id=\"form-input\" required=\"required\" size=\"40\" />
+<input value='".$nama."' type=\"text\" name=\"nama\" id=\"form-input\" required=\"required\" size=\"40\" />
+<input value='".$id."'type=\"hidden\" name=\"id\" id=\"form-input\" required=\"required\" size=\"40\" />
 <br />
 
 <div style=\"width:90px\" id=\"form-label\">Email</div>
-<input type=\"text\" name=\"email\" id=\"form-input\" required=\"required\" size=\"40\" />
+<input value='".$email."' type=\"text\" name=\"email\" id=\"form-input\" required=\"required\" size=\"40\" />
 <br />
 
 <div style=\"width:90px\" id=\"form-label\">Password</div>
-<input type=\"password\" name=\"password\" id=\"form-input\" required=\"required\" size=\"40\" />
+<input value='".$password."' type=\"password\" name=\"password\" id=\"form-input\" required=\"required\" size=\"40\" />
 <br />
 
 <div style=\"width:90px\" id=\"form-label\">Jabatan</div>
-<input type=\"text\" name=\"jabatan\" id=\"form-input\" required=\"required\" size=\"40\" />
+<input value='".$divisi."' type=\"text\" name=\"jabatan\" id=\"form-input\" required=\"required\" size=\"40\" />
 <br />
 
 <input type=\"submit\" name=\"Submit\" value=\"Add New And Save\" id=\"form-submit\" style=\"margin-bottom:5px\"/>

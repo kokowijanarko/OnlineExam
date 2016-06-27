@@ -6,17 +6,7 @@ include "error/error-access-denied-module.php";
 }
 else{
 if ($_SESSION[typeuser]=='admin'){
-if(isset($_GET['msg'])){
-	if($_GET['msg'] == 1){
-		echo '<script>alert("Penambahan User Baru Berhasil")</script>';
-	}elseif($_GET['msg'] == 2){
-		echo '<script>alert("Perubahan Data User Berhasil Disimpan")</script>';
-	}elseif($_GET['msg'] == 3){
-		echo '<script>alert("Hapus Data User Berhasil")</script>';
-	}elseif($_GET['msg'] == 4){
-		echo '<script>alert("Hapus Data User Gagal")</script>';
-	}
-}
+
 
 // Halaman Awal Untuk Menampilkan Data
 switch($_GET[act]){
@@ -43,7 +33,18 @@ $p       = new Paging;
 $batas   = 5;
 $posisi  = $p->cariPosisi($batas);
 $sql	 = mysql_query("
-SELECT * FROM member
+SELECT
+	a.`score_id` AS id_nilai,
+	a.`score_nim` AS nis,
+	a.`score_score` AS score,
+	b.`nama` AS nama_siswa,
+	b.`kelas` AS nama_kelas,
+	c.`mapel_id` AS id_mapel,
+	c.`mapel_name` AS nama_mapel
+
+FROM score a
+JOIN tuser b ON b.`nim` = a.`score_nim`
+JOIN mapel c ON c.`mapel_id` = a.`score_mapel_id`
 LIMIT $posisi,$batas");
 
 echo '
@@ -52,10 +53,11 @@ echo '
 		<thead>
 		<tr>
 			<th>NO</th>
+			<th>NIS</th>
 			<th>NAMA</th>
-			<th>EMAIL</th>
-			<th>JABATAN</th>			
-			<th>TIPE</th>			
+			<th>KELAS</th>
+			<th>MATA PELAJARAN</th>
+			<th colspan="2">NILAI</th>
 			<th>AKSI</th>			
 		</tr>
 		</thead>
@@ -82,22 +84,24 @@ for($i = $posisi; $i <= ($batas + $posisi); $i++ ){
 }
 //var_dump($number, $posisi, $batas);
 $i=0;
-foreach($data as $r){	
+foreach($data as $r){
+	$sql_detail_mapel = mysql_query("SELECT * FROM mapel where mapel_id=".$r['id_mapel']);
+	$mapel_detail = mysql_fetch_assoc($sql_detail_mapel);
+	$conclusion = $result_identitas['score'] >= $mapel_detail['mapel_pass_score'] ? "LULUS" : "TIDAK LULUS";
+
 	echo'
 			<tr>
 				<td>'.$number[$i].'</td>
-				<td>'.$r['nama'].'</td>
-				<td>'.$r['email'].'</td>
-				<td>'.$r['divisi'].'</td>
-				<td>'.$r['typeuser'].'</td>
+				<td>'.$r['nis'].'</td>
+				<td>'.$r['nama_siswa'].'</td>
+				<td>'.$r['nama_kelas'].'</td>
+				<td>'.$r['nama_mapel'].'</td>
+				<td>'.$r['score'].'</td>
+				<td>'.$conclusion.'</td>
 				<td>
-					<a href="inputuser.php?id='.$r['Id'].'" class="action">
-						<img src="images/images_admin/img_admin_edit.png" align="absmiddle" class="img_edit" width="20px" />
-						
-					</a>
-					<a href="deleteuser.php?id='.$r['Id'].'" class="action" id="btn_delete_mapel">
-						<img src="images/images_admin/img_admin_error.png" align="absmiddle" class="img_delete" width="20px" />
-						
+					<a href="admin-home.php?page=exam_result&id='.$r['id_nilai'].'" class="action">
+						<img src="images/images_admin/icon_admin_post.png" align="absmiddle" class="img_detail" width="20px" />
+						Detail
 					</a>
 
 				</td>
