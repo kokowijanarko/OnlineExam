@@ -1,8 +1,8 @@
 <?php
 session_start();
 if(empty($_SESSION['username']) || empty($_SESSION['username'])) {
-	
-$nim = $_SESSION['username'];
+
+//var_dump($nim);
 include "error/error-access-denied-page.php";
 }else{
 if ($_SESSION['typeuser']=='admin'){
@@ -49,6 +49,7 @@ else{
 	<div class="collapsed" style="margin-bottom:15px;">
 		<span id="round1">Hasil Ujian</span>		
 		<?php
+			$nim = $_SESSION['username'];
 			$query_score = mysql_query("
 				SELECT
 					a.`score_id`,

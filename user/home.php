@@ -13,6 +13,7 @@ else{
 </div>
 
 <div id="bg_content_welcome">
+
 Selamat Datang Di Dashboard, Anda Login Sebagai User | Jangan Lupa Logout Setelah Selesai Membuka Halaman Ini :)
 </div>
 
