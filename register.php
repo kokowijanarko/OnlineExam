@@ -61,16 +61,17 @@ echo"
 			
 echo "
 <form action=\"insertuser.php\" method=\"post\" id=\"form-area\" style=\"width:400px;\">
-<div style=\"width:100px\" id=\"form-label\">NIS</div>
-<input type=\"text\" name=\"nopeserta\" id=\"form-input\" required=\"required\" size=\"40\" />
-<br />
 
-<div style=\"width:100px\" id=\"form-label\">Nama</div>
+<div style=\"width:100px\" id=\"form-label\">Nama Lengkap</div>
 <input type=\"text\" name=\"nama\" id=\"form-input\" required=\"required\" size=\"40\" />
 <br />
 
-<div style=\"width:100px\" id=\"form-label\">Kelas</div>
-<input type=\"text\" name=\"kelas\" id=\"form-input\" required=\"required\" size=\"40\" />
+<div style=\"width:100px\" id=\"form-label\">Username</div>
+<input type=\"text\" name=\"username\" id=\"form-input\" required=\"required\" size=\"40\" />
+<br />
+
+<div style=\"width:100px\" id=\"form-label\">email</div>
+<input type=\"text\" name=\"email\" id=\"form-input\" required=\"required\" size=\"40\" />
 <br />
 
 <div style=\"width:100px\" id=\"form-label\">No Telepon</div>
@@ -79,6 +80,10 @@ echo "
 
 <div style=\"width:100px\" id=\"form-label\">Password</div>
 <input type=\"password\" name=\"password\" id=\"form-input\" required=\"required\" size=\"40\" />
+<br />
+
+<div style=\"width:100px\" id=\"form-label\">Ulangi Password</div>
+<input type=\"password\" name=\"conf_password\" id=\"form-input\" required=\"required\" size=\"40\" />
 <br />
 
 <input type=\"submit\" name=\"Submit\" value=\"REGISTER\" id=\"form-submit\" style=\"margin-bottom:5px\"/>

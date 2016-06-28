@@ -3,27 +3,34 @@
 include "koneksi.php";
 //var_dump($_POST);die;
 //tangkap data dari form
-$nopeserta = $_POST['nopeserta'];
+
 $nama= $_POST['nama'];
-$kelas = $_POST['kelas'];
+$username= $_POST['username'];
+$email= $_POST['emial'];
 $telepon = $_POST['telepon'];
 $password = $_POST['password'];
+$conf_password = $_POST['conf_password'];
 $tanggal=date("Y-m-d H:i:s");
 
 //simpan data ke database
-$query = mysql_query("
-insert into tuser 
+if($password == $conf_password){
+	$pass = md5($password);
+	$query = mysql_query("
+	insert into tuser 
+	values(
+	'',
+	'$nama', 
+	'$username', 
+	'$email',
+	'$telepon', 
+	'$pass',
+	'$tanggal')") or die(mysql_error());
 
-values(
-'',
-'$nopeserta', 
-'$nama', 
-'$kelas',
-'$telepon', 
-'$password',
-'$tanggal')") or die(mysql_error());
-
-if ($query) {
-	header('location:loginsiswa.php?msg=1');
+	if ($query) {
+		header('location:loginsiswa.php?msg=1');
+	}
+}else{
+	echo '<script>alert("password tidak singkron")</script>';
+	header('location:register.php');
 }
 ?>

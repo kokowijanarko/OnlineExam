@@ -43,7 +43,7 @@ return (true);
 <form id="form-login" name="login" method="post" action="check-login1.php?op=in" onSubmit="return validationlogin(this)">
   
   <img src="admin/images/images_login/img_login_user.png" align="absmiddle" class="img_user" />
-  <input type="text" name="username" size="29" id="input" placeholder="NIS"/>
+  <input type="text" name="username" size="29" id="input" placeholder="USERNAME"/>
   <br />
 	
   <img src="admin/images/images_login/img_login_pass.png" align="absmiddle" class="img_pass" />
