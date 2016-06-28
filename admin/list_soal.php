@@ -14,7 +14,7 @@ default:
 echo "
 <script type=\"text/javascript\">
 function warning() {
-return confirm('Are You Sure To Delete This Data?');
+return confirm('Yakin Ingin Menghapus data ini?');
 }
 </script>
 ";
@@ -50,11 +50,18 @@ $posisi  = $p->cariPosisi($batas);
 $id = $_GET['id'];
 $sql	 = mysql_query("select * from soal where mapel_id=$id order by soalid ASC LIMIT $posisi,$batas");
 //var_dump(mysql_fetch_array($sql));
+$idx = 0;
+$nomor = 1;
+
+for($i = $posisi; $i <= ($batas + $posisi); $i++ ){
+	$number[] = $i+1;
+}
+$i=0;
 while($r = mysql_fetch_array($sql)){
 
 echo "
 <div id=\"content_data\">
-<div style=\"width:10px\">$r[soalid].</div>
+<div style=\"width:10px\">$number[$i].</div>
 <div style=\"width:200px\" align=\"left\">$r[pertanyaan]</div>
 <div style=\"width:140px\" align=\"left\">A. $r[pilihan_a]<br><br>
 B. $r[pilihan_b]<br><br>
@@ -66,16 +73,16 @@ D. $r[pilihan_d]<br><br>
 <div style=\"width:150px\" align=\"right\">
 
 <img src=\"images/images_admin/img_admin_edit.png\" align=\"absmiddle\" class=\"img_edit\" />
-<a href=\"admin-home.php?page=listsoalagama&act=edit&id=$r[soalid]\" class=\"action\">Edit</a>
+<a href=\"input_soal.php?slid=$r[soalid]&mpl=$id\" class=\"action\">Edit</a>
 
 <img src=\"images/images_admin/img_admin_delete.png\" align=\"absmiddle\" class=\"img_del\" />
-<a href=\"admin-home.php?page=listsoalagama&act=delete&id=$r[soalid]\" class=\"action\" onClick=\"return warning();\">Delete</a>
+<a href=\"delete_soal.php?slid=$r[soalid]&mpl=$id\" class=\"action\" onClick=\"return warning();\">Delete</a>
 
 </div>
 </div>
 ";
 
-$no++;
+$i++;
 }
 
 echo "

@@ -53,11 +53,32 @@ $view_conf = mysql_fetch_array($conf);
 <!-- Content Right -->
 
 <?php
-$id = $_GET['id'];
-$qry = mysql_query('select mapel_name from mapel where mapel_id='.$id);
-$mapel = mysql_fetch_row($qry);
-//print_r($mapel);
-$mapel = $mapel[0];
+if(isset($_GET['slid']) && isset($_GET['mpl'])){
+	$soal_id = $_GET['slid'];
+	$mapel_id = $_GET['mpl'];
+	$qry = mysql_query('select * from soal where soalid='.$soal_id);
+	$soal = mysql_fetch_assoc($qry);
+	//var_dump($soal, $soal_id, $mapel_id);die;
+	if(!empty($soal)){
+		$soal_id = $soal['soalid'];
+		$pertanyaan = $soal['pertanyaan'];
+		$pilihan_a = $soal['pilihan_a'];
+		$pilihan_b = $soal['pilihan_b'];
+		$pilihan_c = $soal['pilihan_c'];
+		$pilihan_d = $soal['pilihan_d'];
+		$jawaban = $soal['jawaban'];
+	}
+	//var_dump($soal);die;
+}else{
+	$soal_id = '';
+	$pertanyaan = '';
+	$pilihan_a = '';
+	$pilihan_b = '';
+	$pilihan_c = '';
+	$pilihan_d = '';
+	$jawaban = '';
+}
+
 
 echo"
 <div id=\"content\" style=\"height:650px\">
@@ -71,31 +92,32 @@ echo"
 
 echo "
 <form action=\"insertsoal.php\" method=\"post\" id=\"form-area\" style=\"width:700px;\">
-<input type=\"hidden\" name=\"id\" id=\"form-input\" value=\"$id\" required=\"required\" size=\"8\" /></br>
+<input type=\"hidden\" name=\"soal_id\" id=\"form-input\" value=\"$soal_id\" required=\"required\" size=\"8\" /></br>
+<input type=\"hidden\" name=\"mapel_id\" id=\"form-input\" value=\"$mapel_id\" required=\"required\" size=\"8\" /></br>
 
 <div style=\"width:90px\" id=\"form-label\">Input Soal</div>
-<input type=\"textarea\" name=\"soalt\" id=\"form-input\" required=\"required\" size=\"90\" />
+<input value='$pertanyaan' type=\"textarea\" name=\"soalt\" id=\"form-input\" required=\"required\" size=\"90\" />
 <br />
 
 <div style=\"width:100px\" id=\"form-label\">Pilihan Jawaban :</div><br><br>
 <div style=\"width:90px\" id=\"form-label\">Pilihan A</div>
-<input type=\"text\" name=\"pil_1\" id=\"form-input\" required=\"required\" size=\"40\" /><br>
+<input value='$pilihan_a'type=\"text\" name=\"pil_1\" id=\"form-input\" required=\"required\" size=\"40\" /><br>
 <div style=\"width:90px\" id=\"form-label\">Pilihan B</div>
-<input type=\"text\" name=\"pil_2\" id=\"form-input\" required=\"required\" size=\"40\" /><br>
+<input value='$pilihan_b' type=\"text\" name=\"pil_2\" id=\"form-input\" required=\"required\" size=\"40\" /><br>
 <div style=\"width:90px\" id=\"form-label\">Pilihan C</div>
-<input type=\"text\" name=\"pil_3\" id=\"form-input\" required=\"required\" size=\"40\" /><br>
+<input value='$pilihan_c' type=\"text\" name=\"pil_3\" id=\"form-input\" required=\"required\" size=\"40\" /><br>
 <div style=\"width:90px\" id=\"form-label\">Pilihan D</div>
-<input type=\"text\" name=\"pil_4\" id=\"form-input\" required=\"required\" size=\"40\" /><br>
+<input value='$pilihan_d' type=\"text\" name=\"pil_4\" id=\"form-input\" required=\"required\" size=\"40\" /><br>
 
 
 
 <br />
 
 <div style=\"width:90px\" id=\"form-label\">Kunci Jawaban</div>
-<input type=\"text\" name=\"keyjab\" id=\"form-input\" required=\"required\" size=\"10\" />
+<input value='$jawaban'type=\"text\" name=\"keyjab\" id=\"form-input\" required=\"required\" size=\"10\" />
 <br />
 
-<input type=\"submit\" name=\"Submit\" value=\"Add New And Save\" id=\"form-submit\" style=\"margin-bottom:5px\"/>
+<input type=\"submit\" name=\"Submit\" value=\"Simpan\" id=\"form-submit\" style=\"margin-bottom:5px\"/>
 </form>
 </div>
 ";
