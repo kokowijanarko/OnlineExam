@@ -66,6 +66,14 @@ echo "
 <input type=\"text\" name=\"nama\" id=\"form-input\" required=\"required\" size=\"40\" />
 <br />
 
+<div style=\"width:100px\" id=\"form-label\">Nomor Peserta</div>
+<input type=\"text\" name=\"no_peserta\" id=\"form-input\" required=\"required\" size=\"40\" />
+<br />
+
+<div style=\"width:100px\" id=\"form-label\">Jurusan</div>
+<input type=\"text\" name=\"jurusan\" id=\"form-input\" required=\"required\" size=\"40\" />
+<br />
+
 <div style=\"width:100px\" id=\"form-label\">Username</div>
 <input type=\"text\" name=\"username\" id=\"form-input\" required=\"required\" size=\"40\" />
 <br />

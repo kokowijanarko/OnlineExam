@@ -122,7 +122,7 @@ include "koneksi.php";
 		
 		?>
         
-        <input type="hidden" name="username" value="<?php echo $_SESSION['username']?>" />
+        <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']?>" />
         <input type="hidden" name="benar" value="<?php echo $benar;?>" />
         <input type="hidden" name="salah" value="<?php echo $salah;?>" />
         <input type="hidden" name="kosong" value="<?php echo $kosong;?>" />

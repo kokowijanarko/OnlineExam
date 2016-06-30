@@ -3,7 +3,7 @@
 	include "koneksi.php";
 	if(isset($_POST)){
 		var_dump($_POST);
-		$id_user=$_POST['username'];
+		$id_user=$_POST['user_id'];
 		$benar=$_POST['benar'];
 		$salah=$_POST['salah'];
 		$kosong=$_POST['kosong'];
@@ -14,7 +14,7 @@
 		$query=mysql_query("
 			insert into score 
 			(
-				score_nim, 
+				score_user_id, 
 				score_mapel_id, 
 				score_score, 
 				score_answer_false, 
@@ -30,10 +30,11 @@
 				'".$benar."',
 				'".$kososng."'
 			)
-		");
+		")or die(mysql_error());
 		
 		//insert_detail_jawaban
 		$id_score = mysql_insert_id();
+		
 		for($i=0;$i<$_POST['jumlah'];$i++){
 			//$batch .='("'. $id_score .'","'.$_POST['soal_id'][$i].'","'.$_POST['jawaban'][$_POST['soal_id'][$i]].'"),'; 
 			$query = mysql_query("
@@ -46,7 +47,7 @@
 					'".$_POST['soal_id'][$i]."',
 					'".$_POST['jawaban'][$_POST['soal_id'][$i]]."'
 				)
-			");		
+			")or die(mysql_error());		
 		
 		}
 		

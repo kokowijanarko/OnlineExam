@@ -49,7 +49,7 @@ else{
 	<div class="collapsed" style="margin-bottom:15px;">
 		<span id="round1">Hasil Ujian</span>		
 		<?php
-			$nim = $_SESSION['username'];
+			$user_id = $_SESSION['user_id'];
 			$query_score = mysql_query("
 				SELECT
 					a.`score_id`,
@@ -57,7 +57,7 @@ else{
 					b.`mapel_name`
 				FROM score a 
 				JOIN mapel b ON b.`mapel_id` = a.`score_mapel_id`
-				WHERE a.`score_nim` = $nim
+				WHERE a.`score_user_id` = $user_id
 			");
 			//var_dump($query);
 			//$mapel = mysql_fetch_array($query);

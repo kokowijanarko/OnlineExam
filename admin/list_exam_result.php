@@ -35,27 +35,27 @@ $posisi  = $p->cariPosisi($batas);
 $sql	 = mysql_query("
 SELECT
 	a.`score_id` AS id_nilai,
-	a.`score_nim` AS nis,
 	a.`score_score` AS score,
 	b.`nama` AS nama_siswa,
-	b.`kelas` AS nama_kelas,
+	b.`jurusan` AS jurusan,
+	b.`nomor_peserta` AS no_peserta,
 	c.`mapel_id` AS id_mapel,
 	c.`mapel_name` AS nama_mapel
 
 FROM score a
-JOIN tuser b ON b.`nim` = a.`score_nim`
+JOIN tuser b ON b.`id` = a.`score_user_id`
 JOIN mapel c ON c.`mapel_id` = a.`score_mapel_id`
-LIMIT $posisi,$batas");
-
+LIMIT $posisi,$batas") or die(mysql_error());
+//var_dump(mysql_fetch_array($sql));die;
 echo '
 	<div class="datagrid">
 	<table width = "100%">
 		<thead>
 		<tr>
 			<th>NO</th>
-			<th>NIS</th>
+			<th>No. Peserta</th>
 			<th>NAMA</th>
-			<th>KELAS</th>
+			<th>JURUSAN</th>
 			<th>MATA PELAJARAN</th>
 			<th colspan="2">NILAI</th>
 			<th>AKSI</th>			
@@ -92,9 +92,9 @@ foreach($data as $r){
 	echo'
 			<tr>
 				<td>'.$number[$i].'</td>
-				<td>'.$r['nis'].'</td>
+				<td>'.$r['no_peserta'].'</td>
 				<td>'.$r['nama_siswa'].'</td>
-				<td>'.$r['nama_kelas'].'</td>
+				<td>'.$r['jurusan'].'</td>
 				<td>'.$r['nama_mapel'].'</td>
 				<td>'.$r['score'].'</td>
 				<td>'.$conclusion.'</td>

@@ -5,6 +5,8 @@ include "koneksi.php";
 //tangkap data dari form
 
 $nama= $_POST['nama'];
+$no_peserta= $_POST['no_peserta'];
+$jurusan= $_POST['jurusan'];
 $username= $_POST['username'];
 $email= $_POST['emial'];
 $telepon = $_POST['telepon'];
@@ -24,7 +26,9 @@ if($password == $conf_password){
 	'$email',
 	'$telepon', 
 	'$pass',
-	'$tanggal')") or die(mysql_error());
+	'$tanggal',
+	'$jurusan',
+	'$no_peserta')") or die(mysql_error());
 
 	if ($query) {
 		header('location:loginsiswa.php?msg=1');

@@ -53,18 +53,18 @@ $sql	 = mysql_query("
 $sql_identitas	 = mysql_query("
 	SELECT
 		a.`score_id` AS id_nilai,
-		a.`score_nim` AS nis,
+		a.`score_user_id` AS user_id,
 		a.`score_score` AS score,
 		a.`score_answer_false` AS salah,
 		a.`score_answer_true` AS benar,
 		a.`score_answer_empty` AS kosong,
 		b.`nama` AS nama_siswa,
-		b.`kelas` AS nama_kelas,
+		b.`jurusan` AS jurusan,
 		c.`mapel_id` AS id_mapel,
 		c.`mapel_name` AS nama_mapel
 
 	FROM score a
-	JOIN tuser b ON b.`nim` = a.`score_nim`
+	JOIN tuser b ON b.`id` = a.`score_user_id`
 	JOIN mapel c ON c.`mapel_id` = a.`score_mapel_id`
 	
 	WHERE a.`score_id` = '".$id."'
@@ -84,14 +84,14 @@ echo'
 			<td>'.$result_identitas['nama_siswa'].'</td>
 		</tr>
 		<tr>
-			<td>NIS</td>
+			<td>No. Peserta</td>
 			<td>:</td>
-			<td>'.$result_identitas['nis'].'</td>
+			<td>'.$_SESSION['no_peserta'].'</td>
 		</tr>
 		<tr>
-			<td>Kelas</td>
+			<td>Jurusan</td>
 			<td>:</td>
-			<td>'.$result_identitas['nama_kelas'].'</td>
+			<td>'.$_SESSION['jurusan'].'</td>
 		</tr>
 		<tr>
 			<td>Mata Pelajaran</td>
