@@ -86,7 +86,7 @@ $time_exam = (intval($time_exam)*60) * 1000;
 					// method:'post',
 					// data:params
 				// });
-				$('#submit-button').removeClass('collapse');
+				//$('#submit-button').removeClass('collapse');
 				$('#form_soal').addClass('collapse');
 			} else {
 				$this.html(event.strftime('Siswa Waktu: <span>%H:%M:%S</span>'));
@@ -161,6 +161,9 @@ echo'
 </div>
 
 <form action='nilai.php' method='post' id="form-area" onSubmit="return validasi_input(this)">
+<div id="submit-button" >
+				<input type="submit" name="submit" value="Klik Untuk Submit Jawaban Anda">
+            </div>
 <input type="hidden" value="<?php echo $_GET['id']?>" name="mapel_id">
 
 <table id="form_soal" width="650" border="0" class="font" >
@@ -206,9 +209,7 @@ echo'
 		}
 		?>
 			</table>
-        	<div id="submit-button" class="collapse">
-				<input type="submit" name="submit" value="Waktu Habis Klik Untuk Submit Jawaban Anda">
-            </div>
+        	
 			
 		</form>
         </p>
