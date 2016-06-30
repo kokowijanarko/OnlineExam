@@ -52,7 +52,7 @@ else{
 			//$mapel = mysql_fetch_array($query);
 			while($mpl = mysql_fetch_array($query)){			
 				echo '
-					<a href="input_soal.php?&id='.$mpl['mapel_id'].'">
+					<a href="input_soal.php?mpl='.$mpl['mapel_id'].'">
 						<img src="images/images_admin/img_admin_arrow.png" border="0" />'.$mpl['mapel_name'].'
 					</a>
 				';

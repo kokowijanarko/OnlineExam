@@ -22,8 +22,8 @@ return confirm('Yakin Ingin Menghapus data ini?');
 echo"
 <div id=\"content\" style=\"height:100%px\">
 <div id=\"title_content\">
-<img src=\"images/images_admin/icon_admin_user.png\" align=\"absmiddle\" class=\"img_title\" /> Daftar Soal Agama
-<a href=\"inputsoalagama.php\"><img src=\"images/images_admin/img_admin_add.png\" align=\"absmiddle\" border=\"0\" /></a>
+<img src=\"images/images_admin/icon_admin_user.png\" align=\"absmiddle\" class=\"img_title\" /> Daftar Soal 
+
 </div>
 ";
 

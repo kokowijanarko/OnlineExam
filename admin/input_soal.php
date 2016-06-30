@@ -53,9 +53,10 @@ $view_conf = mysql_fetch_array($conf);
 <!-- Content Right -->
 
 <?php
+$mapel_id = $_GET['mpl'];
 if(isset($_GET['slid']) && isset($_GET['mpl'])){
 	$soal_id = $_GET['slid'];
-	$mapel_id = $_GET['mpl'];
+	
 	$qry = mysql_query('select * from soal where soalid='.$soal_id);
 	$soal = mysql_fetch_assoc($qry);
 	//var_dump($soal, $soal_id, $mapel_id);die;
@@ -92,8 +93,8 @@ echo"
 
 echo "
 <form action=\"insertsoal.php\" method=\"post\" id=\"form-area\" style=\"width:700px;\">
-<input type=\"hidden\" name=\"soal_id\" id=\"form-input\" value=\"$soal_id\" required=\"required\" size=\"8\" /></br>
-<input type=\"hidden\" name=\"mapel_id\" id=\"form-input\" value=\"$mapel_id\" required=\"required\" size=\"8\" /></br>
+<input type=\"hidden\" name=\"soal_id\" id=\"form-input\" value=\"$soal_id\"  size=\"8\" /></br>
+<input type=\"hidden\" name=\"mapel_id\" id=\"form-input\" value=\"$mapel_id\"  size=\"8\" /></br>
 
 <div style=\"width:90px\" id=\"form-label\">Input Soal</div>
 <input value='$pertanyaan' type=\"textarea\" name=\"soalt\" id=\"form-input\" required=\"required\" size=\"90\" />

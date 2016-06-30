@@ -1,6 +1,7 @@
  <?php
 	//var_dump($_POST);die;
 	include "../koneksi.php";
+	//var_dump($_POST);
 	$soalt=$_POST['soalt'];
 	$keyjab=$_POST['keyjab'];
 	$pil_1=$_POST['pil_1'];
@@ -9,16 +10,16 @@
 	$pil_4=$_POST['pil_4'];
 	$mapel_id=$_POST['mapel_id'];
 	$soal_id=$_POST['soal_id'];
-	
+	//var_dump($mapel_id);die;
 	if(empty($soal_id) || $soal_id == ''){
 		$query=mysql_query("INSERT INTO soal 
-		(mapel_id, jawaban, pertanyaan, pilihan_a, pilihan_b, pilihan_c, pilihan_d)
-		
-		VALUES('$id','$keyjab','$soalt','$pil_1','$pil_2','$pil_3','$pil_4')")or die(mysql_error());	
+		(mapel_id, jawaban, pertanyaan, pilihan_a, pilihan_b, pilihan_c, pilihan_d)		
+		VALUES
+		('$mapel_id','$keyjab','$soalt','$pil_1','$pil_2','$pil_3','$pil_4')")or die(mysql_error());	
 		
 		if($query){
 			echo 'javascript:alert("berhasil menambahkan soal!")';
-			header('location:input_soal?mpl='.$mapel_id);
+			header('location:input_soal.php?mpl='.$mapel_id);
 		}
 	}else{
 		$query = mysql_query("
