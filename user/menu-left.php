@@ -35,12 +35,23 @@ else{
 			$query = mysql_query('SELECT * FROM mapel');
 			//var_dump($query);
 			//$mapel = mysql_fetch_array($query);
-			while($mpl = mysql_fetch_array($query)){			
-				echo '
-					<a href="list_soal.php?id='.$mpl['mapel_id'].'">
-						<img src="images/images_admin/img_admin_arrow.png" border="0" />'.$mpl['mapel_name'].'
-					</a>
-				';
+			$sql = mysql_query('SELECT * FROM score WHERE score_user_id ='.$_SESSION['user_id']);
+			$result = mysql_fetch_assoc($sql);
+			//var_dump($result);
+			while($mpl_score = mysql_fetch_array($sql)){
+				$mpl_id[] = $mpl_score['score_mapel_id'];
+			}			
+			//var_dump($mpl_id);
+			while($mpl = mysql_fetch_array($query)){	
+				foreach($mpl_id as $mi){
+					if($mpl['mapel_id'] !== $mi){
+						echo '
+							<a href="list_soal.php?id='.$mpl['mapel_id'].'">
+								<img src="images/images_admin/img_admin_arrow.png" border="0" />'.$mpl['mapel_name'].'
+							</a>
+						';	
+					}
+				}				
 			}
 			
 		?>

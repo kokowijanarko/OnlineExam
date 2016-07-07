@@ -170,6 +170,14 @@ echo'
   <?php
 		$hasil=mysql_query("select * from soal where mapel_id= '".$_GET['id']."'LIMIT 30");
 		$jumlah=mysql_num_rows($hasil);
+		
+		// $idx = array();
+		// for($i=0; $i<$jumlah; $i++){			
+			// array_push($idx, $i);
+		// }
+		// shuffle($idx);	
+		// var_dump($idx);
+		// die;
 		$urut=0;
 		while($row =mysql_fetch_array($hasil))
 		{
@@ -180,32 +188,45 @@ echo'
 			$pilihan_c=$row["pilihan_c"];
 			$pilihan_d=$row["pilihan_d"]; 
 			
-			?>
+			$list_soal[]=array(
+				"soalid"=>$id,
+				"pertanyaan"=>$pertanyaan,
+				"pilihan_a"=>$pilihan_a,
+				"pilihan_b"=>$pilihan_b,
+				"pilihan_c"=>$pilihan_c,
+				"pilihan_d"=>$pilihan_d
+			);		
+		}
+		shuffle($list_soal);
+		//var_dump($list_soal);die;
 		
-			<input type="hidden" id="id[]" name="id[]" value=<?php echo $id; ?>>
-			<input type="hidden" name="jumlah" value=<?php echo $jumlah; ?>>
+		$no = 1;
+		foreach($list_soal as $ls){
+			echo'
+			<input type="hidden" id="id[]" name="id[]" value="'.$ls['soalid'].'">
+			<input type="hidden" name="jumlah" value="'.$jumlah.'">
 			<tr>
-			  	<td width="17"><font color="#FFFFFF"><?php echo $urut=$urut+1; ?></font></td>
-			  	<td width="430"><font color="#FFFFFF"><strong><?php echo "$pertanyaan"; ?></strong></font></td>
+			  	<td width="17"><font color="#FFFFFF">'.$no.'</font></td>
+			  	<td width="430"><font color="#FFFFFF"><strong>"'.$ls['pertanyaan'].'"</strong></font></td>
 			</tr>
 			<tr>
 			  	<td height="21">&nbsp;</td>
-			  	<td><input name="pilihan[<?php echo $id; ?>]" type="radio" value="a"> <font color="#FFFFFF"><?php echo "A. $pilihan_a";?></font> </td>
+			  	<td><input name="pilihan['.$ls['soalid'].']" type="radio" value="a"> <font color="#FFFFFF">A. '.$ls['pilihan_a'].'</font> </td>
 			</tr>
 			<tr>
-			  	<td>&nbsp;</td>
-			  	<td><input name="pilihan[<?php echo $id; ?>]" type="radio" value="b"> <font color="#FFFFFF"><?php echo "B. $pilihan_b";?></font> </td>
+			  	<td height="21">&nbsp;</td>
+			  	<td><input name="pilihan['.$ls['soalid'].']" type="radio" value="b"> <font color="#FFFFFF">B. '.$ls['pilihan_b'].'</font> </td>
 			</tr>
 			<tr>
-			  	<td>&nbsp;</td>
-			  	<td><input name="pilihan[<?php echo $id; ?>]" type="radio" value="c"> <font color="#FFFFFF"><?php echo "C. $pilihan_c";?></font> </td>
+			  	<td height="21">&nbsp;</td>
+			  	<td><input name="pilihan['.$ls['soalid'].']" type="radio" value="c"> <font color="#FFFFFF">C. '.$ls['pilihan_c'].'</font> </td>
 			</tr>
 			<tr>
-				<td>&nbsp;</td>
-			  	<td><input name="pilihan[<?php echo $id; ?>]" type="radio" value="d"> <font color="#FFFFFF"><?php echo "D. $pilihan_d";?></font> </td>
-            </tr>
-			
-		<?php
+			  	<td height="21">&nbsp;</td>
+			  	<td><input name="pilihan['.$ls['soalid'].']" type="radio" value="d"> <font color="#FFFFFF">D. '.$ls['pilihan_d'].'</font> </td>
+			</tr>			
+			';
+			$no++;
 		}
 		?>
 			</table>
