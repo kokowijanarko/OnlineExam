@@ -78,6 +78,30 @@ $pdf->Write(0, 'Hasil Seleksi', '', 0, 'C', true, 0, false, false, 0);
 $pdf->SetFont('helvetica', '', 10);
 
 // -----------------------------------------------------------------------------
+$query_conclusion = mysql_query("
+SELECT	
+	(IF(a.`score_score` >= b.`mapel_pass_score`, 'LULUS', 'TIDAK LULUS')) AS conclusion
+
+FROM score a
+JOIN mapel b ON b.`mapel_id` = a.`score_mapel_id`
+
+WHERE score_user_id = $id
+
+");
+
+
+$conclusion_final=array("LULUS");
+while($row = mysql_fetch_assoc($query_conclusion)){
+	if($row['conclusion'] == "TIDAK LULUS"){
+		array_push($conclusion_final, 'TIDAK LULUS');
+	}
+}
+if(in_array('TIDAK LULUS', $conclusion_final)){
+	$hasil_akhir = 'TIDAK LULUS';
+}else{
+	$hasil_akhir = 'LULUS';
+}
+//var_dump($hasil_akhir);die;
 $query_identity = mysql_query("SELECT * FROM tuser WHERE id=$id");
 $identity = mysql_fetch_assoc($query_identity);
 
@@ -108,6 +132,11 @@ $tbl = '
 			<td>No. Telp</td>
 			<td> : </td>
 			<td>'.$identity['tlp'].'</td>
+		</tr>
+		<tr>
+			<td>Hasil Akhir</td>
+			<td> : </td>
+			<td><strong>'.$hasil_akhir.'</strong></td>
 		</tr>		
 	</table>
 
@@ -178,7 +207,7 @@ $pdf->writeHTML($tbl_hasil, true, false, false, false, '');
 // -----------------------------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output('example_048.pdf', 'I');
+$pdf->Output('hasil_ujian_'.$identity['nomor_peserta'].'-'.$identity['nama'].'.pdf', 'I');
 
 //============================================================+
 // END OF FILE
