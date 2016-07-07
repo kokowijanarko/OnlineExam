@@ -33,6 +33,10 @@ if(!empty($_SESSION[username]) || !empty($_SESSION[username])) {
 		include "list_exam_result.php";
 	}elseif($_GET['page']=="exam_result" && isset($_GET['id'])){
 		include "detail_exam_result.php";
+	}elseif($_GET['page']=="list_examinees"){
+		include "list_examinees.php";
+	}elseif($_GET['page']=="list_examinees" && isset($_GET['id'])){
+		include "print_pdf_examinees.php";
 	}else{
 		include "home.php";
 	}

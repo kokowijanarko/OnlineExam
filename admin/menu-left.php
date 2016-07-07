@@ -85,6 +85,9 @@ else{
 		<a href="admin-home.php?page=exam_result">
 		<img src="images/images_admin/img_admin_arrow.png" border="0" /> Hasil ujian
 		</a>
+		<a href="admin-home.php?page=list_examinees">
+		<img src="images/images_admin/img_admin_arrow.png" border="0" /> Laporan Hasil ujian
+		</a>
 		
 		
 	</div>
