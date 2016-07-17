@@ -43,15 +43,20 @@ else{
 			}			
 			//var_dump($mpl_id);
 			while($mpl = mysql_fetch_array($query)){	
-				
-					if($mpl['mapel_id'] !== $mi){
+				$sql = mysql_query('
+					SELECT * FROM score 
+					WHERE score_user_id ='.$_SESSION['user_id'].'
+					AND score_mapel_id='. $mpl['mapel_id']			
+				);
+				$result = mysql_fetch_row($sql);
+				//var_dump($result);
+				if(empty($result)){					
 						echo '
 							<a href="list_soal.php?id='.$mpl['mapel_id'].'">
 								<img src="images/images_admin/img_admin_arrow.png" border="0" />'.$mpl['mapel_name'].'
 							</a>
-						';	
-					}
-				
+						';
+				}				
 			}
 			
 		?>
