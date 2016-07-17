@@ -118,7 +118,7 @@ foreach($data as $r){
 						<img src="images/images_admin/icon_admin_post.png" align="absmiddle" class="img_detail" width="20px" />
 						Detail
 					</a>
-					<a onClick="warning()" href="delete_exam_result.php?id='.$r['id_nilai'].'&mplid='.$r['id_mapel'].'" class="action">
+					<a onClick="warning()" href="delete_exam_result.php?id='.$r['id_nilai'].'" class="action">
 						<img src="images/images_admin/img_admin_delete.png" align="absmiddle" class="img_detail" width="20px" />
 						hapus
 					</a>

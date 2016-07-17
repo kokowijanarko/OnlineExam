@@ -5,14 +5,31 @@
 <title>..::: Login Siswa:::.</title>
 <link rel="stylesheet" type="text/css" href="admin/files/style_login.css" />
 
-
+<?php
+	if(!empty($_GET['msg'])){
+		$msg = $_GET['msg'];
+		if($msg == 1){
+			echo'
+				<script>
+					alert("Registrasi Sukses, Silakan Login");
+				</script>
+			';
+		}else{
+			echo'
+				<script>
+					alert("Registrasi Gagal !");
+				</script>
+			';
+		}
+	}
+?>
 <script type="text/javascript">
-var msg='<?php echo $_GET['msg']?>';
-if(msg == 1){
-	alert('Registrasi Sukses, Silakan Login');
-}else{
-	alert('Registrasi Gagal !');
-}
+// var msg='<?php echo $_GET['msg']?>';
+// if(msg == 1){
+	// alert('Registrasi Sukses, Silakan Login');
+// }else{
+	// alert('Registrasi Gagal !');
+// }
 function validationlogin(form){
 if (form.username.value == ""){
 alert("Form Username tidak boleh kosong !");

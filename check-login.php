@@ -7,7 +7,7 @@ $password = $_POST['password'];
 $op = $_GET['op'];
 
 if($op=="in"){
-$cek = mysql_query("SELECT * FROM member WHERE nama='$username' AND password='$password'");
+$cek = mysql_query("SELECT * FROM member WHERE nama='$username' AND password='$password'") or (die(mysql_error()));
     if(mysql_num_rows($cek)==1){//jika berhasil akan bernilai 1
         $c = mysql_fetch_array($cek);
         $_SESSION['username'] = $c['username'];
