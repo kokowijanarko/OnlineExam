@@ -60,7 +60,7 @@ echo"
 </div>";
 ?>
 <?php
-include "koneksi.php";
+include "../koneksi.php";
 		$score=0;
 		$benar=0;
 		$salah=0;

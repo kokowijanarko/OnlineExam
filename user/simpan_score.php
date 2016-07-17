@@ -1,6 +1,6 @@
 <div>
 	<?php
-	include "koneksi.php";
+	include "../koneksi.php";
 	if(isset($_POST)){
 		var_dump($_POST);
 		$id_user=$_POST['user_id'];
