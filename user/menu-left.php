@@ -43,7 +43,7 @@ else{
 			}			
 			//var_dump($mpl_id);
 			while($mpl = mysql_fetch_array($query)){	
-				foreach($mpl_id as $mi){
+				
 					if($mpl['mapel_id'] !== $mi){
 						echo '
 							<a href="list_soal.php?id='.$mpl['mapel_id'].'">
@@ -51,7 +51,7 @@ else{
 							</a>
 						';	
 					}
-				}				
+				
 			}
 			
 		?>
