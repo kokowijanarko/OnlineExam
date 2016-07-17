@@ -11,7 +11,22 @@ if ($_SESSION[typeuser]=='admin'){
 // Halaman Awal Untuk Menampilkan Data
 switch($_GET[act]){
 default:
-
+if(isset($_GET['msg'])){
+	if($_GET['msg'] == 3){
+		echo "
+		<script>
+			alert('Delete Berhasil !');
+		</script>
+		
+		";
+	}else{
+		echo "
+		<script>
+			alert('Delete gagal !');
+		</script>
+		";
+	}
+}
 echo "
 <script type=\"text/javascript\">
 function warning() {
@@ -102,6 +117,10 @@ foreach($data as $r){
 					<a href="admin-home.php?page=exam_result&id='.$r['id_nilai'].'" class="action">
 						<img src="images/images_admin/icon_admin_post.png" align="absmiddle" class="img_detail" width="20px" />
 						Detail
+					</a>
+					<a onClick="warning()" href="delete_exam_result.php?id='.$r['id_nilai'].'" class="action">
+						<img src="images/images_admin/img_admin_delete.png" align="absmiddle" class="img_detail" width="20px" />
+						hapus
 					</a>
 
 				</td>

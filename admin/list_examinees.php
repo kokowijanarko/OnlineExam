@@ -57,6 +57,9 @@ $idx = 0;
 $nomor = 1;
 while($r = mysql_fetch_array($sql)){
 	$index = 0;
+	
+	
+	
 	foreach($r as $x=>$y){
 		unset($r[$index]);
 		$index++;
@@ -73,11 +76,15 @@ for($i = $posisi; $i <= ($batas + $posisi); $i++ ){
 //var_dump($number, $posisi, $batas);
 $i=0;
 foreach($data as $r){	
-	$no_peserta = !empty($r['nomor_peserta'])?$r['nomor_peserta']:'-';
-	$jurusan = !empty($r['jurusan'])?$r['jurusan']:'-';
-	$email = !empty($r['email'])?$r['email']:'-';
-	$telp = !empty($r['tlp'])?$r['tlp']:'-';
-	echo'
+	$sql_score = mysql_query('SELECT * FROM score WHERE score_user_id='.$r['id']);
+	$score = mysql_fetch_row($sql_score);
+	
+	if(!empty($score)){
+		$no_peserta = !empty($r['nomor_peserta'])?$r['nomor_peserta']:'-';
+		$jurusan = !empty($r['jurusan'])?$r['jurusan']:'-';
+		$email = !empty($r['email'])?$r['email']:'-';
+		$telp = !empty($r['tlp'])?$r['tlp']:'-';
+		echo'
 			<tr>
 				<td>'.$number[$i].'</td>
 				<td>'.$no_peserta.'</td>
@@ -92,9 +99,11 @@ foreach($data as $r){
 					</a>					
 				</td>
 			</tr>
+			
+		';
+		$i++;
+	}
 		
-	';
-	$i++;
 }
 
 $jmldata=mysql_num_rows(mysql_query("SELECT * FROM score"));
