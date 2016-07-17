@@ -1,7 +1,8 @@
 <?php
 	include '../koneksi.php';
 	$id = $_GET['id'];
-	var_dump($id);
+	$mpl_id = $_GET['mplid'];
+	//var_dump($id, $mpl_id);die;
 	
 	$result = mysql_query('DELETE FROM score WHERE score_id='.$id);
 	if($result){
