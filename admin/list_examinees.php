@@ -32,7 +32,15 @@ $p       = new Paging;
 $batas   = 5;
 $posisi  = $p->cariPosisi($batas);
 $sql	 = mysql_query("
-SELECT * FROM tuser
+SELECT
+	a.`id`,
+	a.`nomor_peserta`,
+	a.`nama`,
+	a.`jurusan`,
+	a.`email`,
+	a.`tlp`
+FROM tuser a
+WHERE (SELECT MAX(b.score_user_id) FROM score b WHERE b.score_user_id = a.`id`)
 LIMIT $posisi,$batas");
 
 echo '
@@ -58,16 +66,15 @@ $nomor = 1;
 while($r = mysql_fetch_array($sql)){
 	$index = 0;
 	
+		foreach($r as $x=>$y){
+			unset($r[$index]);
+			$index++;
+		}
+		$data[] = $r;
+		$data[$idx]['no'] = $nomor;	
+		$idx++;
+		$nomor++;
 	
-	
-	foreach($r as $x=>$y){
-		unset($r[$index]);
-		$index++;
-	}
-	$data[] = $r;
-	$data[$idx]['no'] = $nomor;	
-	$idx++;
-	$nomor++;
 }
 
 for($i = $posisi; $i <= ($batas + $posisi); $i++ ){
@@ -76,10 +83,8 @@ for($i = $posisi; $i <= ($batas + $posisi); $i++ ){
 //var_dump($number, $posisi, $batas);
 $i=0;
 foreach($data as $r){	
-	$sql_score = mysql_query('SELECT * FROM score WHERE score_user_id='.$r['id']);
-	$score = mysql_fetch_row($sql_score);
 	
-	if(!empty($score)){
+	
 		$no_peserta = !empty($r['nomor_peserta'])?$r['nomor_peserta']:'-';
 		$jurusan = !empty($r['jurusan'])?$r['jurusan']:'-';
 		$email = !empty($r['email'])?$r['email']:'-';
@@ -102,8 +107,7 @@ foreach($data as $r){
 			
 		';
 		$i++;
-	}
-		
+	
 }
 
 $jmldata=mysql_num_rows(mysql_query("SELECT * FROM score"));
