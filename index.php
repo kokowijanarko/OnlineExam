@@ -63,6 +63,13 @@ echo"
 		</a>
 		<font size=\"5px\" color=\"white\">SUDAH PUNYA AKUN</font><br>
 	</div>
+	
+	<div id=\"\" style=\"height:100px\">
+		<a href=\"admin/index.php\">
+			<img src=\"admin/images/images_admin/icon_admin_user.png\" align=\"absmiddle\" class=\"img_title\" />
+		</a>
+		<font size=\"5px\" color=\"white\">ADMIN</font><br>
+	</div>
 </div>
 ";
 ?>
