@@ -1,7 +1,6 @@
 <?php
 session_start();
 include "koneksi.php";
-
 ?>
 
 <?php 
@@ -58,32 +57,46 @@ echo"
  if (!empty($_GET['message']) && $_GET['message'] == 'success') {
                 echo '<h3>Berhasil menambah data!</h3>';
             }
-			
+$nama = '';
+$no_peserta = '';
+$jurusan = '';
+$username = '';
+$email = '';
+$telepon = '';
+
+if(!empty($_SESSION['msg'])){
+	$nama = $_SESSION['msg']['nama'];
+	$no_peserta = $_SESSION['msg']['no_peserta'];
+	$jurusan = $_SESSION['msg']['jurusan'];
+	$username = $_SESSION['msg']['username'];
+	$email = $_SESSION['msg']['email'];
+	$telepon = $_SESSION['msg']['telepon'];
+}
 echo "
 <form action=\"insertuser.php\" method=\"post\" id=\"form-area\" style=\"width:400px;\">
 
 <div style=\"width:100px\" id=\"form-label\">Nama Lengkap</div>
-<input type=\"text\" name=\"nama\" id=\"form-input\" required=\"required\" size=\"40\" />
+<input type=\"text\" name=\"nama\" id=\"form-input\" value= '".$nama."'required=\"required\" size=\"40\" />
 <br />
 
 <div style=\"width:100px\" id=\"form-label\">Nomor Peserta</div>
-<input type=\"text\" name=\"no_peserta\" id=\"form-input\" required=\"required\" size=\"40\" />
+<input type=\"text\" name=\"no_peserta\" id=\"form-input\" value= '".$no_peserta."' required=\"required\" size=\"40\" />
 <br />
 
 <div style=\"width:100px\" id=\"form-label\">Jurusan</div>
-<input type=\"text\" name=\"jurusan\" id=\"form-input\" required=\"required\" size=\"40\" />
+<input type=\"text\" name=\"jurusan\" id=\"form-input\" value= '".$jurusan."' required=\"required\" size=\"40\" />
 <br />
 
 <div style=\"width:100px\" id=\"form-label\">Username</div>
-<input type=\"text\" name=\"username\" id=\"form-input\" required=\"required\" size=\"40\" />
+<input type=\"text\" name=\"username\" id=\"form-input\" value= '".$username."' required=\"required\" size=\"40\" />
 <br />
 
 <div style=\"width:100px\" id=\"form-label\">email</div>
-<input type=\"text\" name=\"email\" id=\"form-input\" required=\"required\" size=\"40\" />
+<input type=\"text\" name=\"email\" id=\"form-input\" value= '".$email."'  required=\"required\" size=\"40\" />
 <br />
 
 <div style=\"width:100px\" id=\"form-label\">No Telepon</div>
-<input type=\"text\" name=\"telepon\" id=\"form-input\" required=\"required\" size=\"40\" />
+<input type=\"text\" name=\"telepon\" id=\"form-input\" value= '".$telepon."' required=\"required\" size=\"40\" />
 <br />
 
 <div style=\"width:100px\" id=\"form-label\">Password</div>
