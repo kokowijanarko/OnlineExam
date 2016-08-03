@@ -11,6 +11,7 @@ $cek = mysql_query("SELECT * FROM member WHERE nama='$username' AND password='$p
     if(mysql_num_rows($cek)==1){//jika berhasil akan bernilai 1
         $c = mysql_fetch_array($cek);
         $_SESSION['username'] = $c['username'];
+        $_SESSION['admin_name'] = $c['nama'];
         $_SESSION['typeuser'] = $c['typeuser'];
         if($c['typeuser']=="admin"){
             header("location:admin/admin-home.php");

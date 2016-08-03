@@ -3,13 +3,14 @@ session_start();
 if(!empty($_SESSION[username]) || !empty($_SESSION[username])) {
 include "error/error-access-denied-page.php";
 }
+
 else{
 ?>
 <div id="header-content1">
 
 		<font id="bold">.::Ujian Online Calon Siswa Baru::.</font><br>
 		Login Date: <?php $date = date("l, d F, Y - H:i A"); echo "$date";?>
-		<br>Anda Login Sebagai <?php echo $_SESSION['username'] ?>
+		<br>Anda Login Sebagai <?php echo $_SESSION['admin_name'] ?>
 </div>
 		
 <div id="header-content2">
