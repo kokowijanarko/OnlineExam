@@ -65,6 +65,7 @@ $email = '';
 $telepon = '';
 
 if(!empty($_SESSION['msg'])){
+	
 	$nama = $_SESSION['msg']['nama'];
 	$no_peserta = $_SESSION['msg']['no_peserta'];
 	$jurusan = $_SESSION['msg']['jurusan'];

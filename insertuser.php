@@ -17,12 +17,12 @@ $tanggal=date("Y-m-d H:i:s");
 
 $qry_cek = mysql_query("SELECT * FROM tuser WHERE nomor_peserta = '".$no_peserta."'");
 $result = mysql_fetch_assoc($qry_cek);
-//var_dump($result);
-
+//var_dump($result);die;
 
 
 //simpan data ke database
 if(!$result){
+	unset($_SESSION['msg']);
 	if($password == $conf_password){
 		$pass = md5($password);
 		$query = mysql_query("
@@ -48,9 +48,25 @@ if(!$result){
 	}
 }else{
 	$_SESSION['msg'] = $_POST;
+	$msg_nama = '';
+	$msg_username = '';
+	$msg_email = '';
+	
+	if($nama == $result['nama']){
+		$msg_nama = ', Nama Lengkap';
+	}
+	
+	if($username == $result['username']){
+		$msg_username = ', Username';
+	}
+	
+	if($email == $result['email']){
+		$msg_email = ', Email';
+	}
+	
 	echo '
 		<script>
-			if(confirm("Nomor Peserta Sudah Terdaftar!")){
+			if(confirm("Nomor Peserta '. $msg_nama . $msg_username . $msg_email .' Sudah Terdaftar!")){
 				window.location = "register.php";
 			}else{
 				window.location = "index.php";
