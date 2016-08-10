@@ -21,7 +21,15 @@ $cek = mysql_query("SELECT * FROM tuser WHERE nomor_peserta ='$no_peserta' and p
 		header("location:user/user-home.php");
  
 	}else{
-         die("No Peserta Salah  <a href=\"javascript:history.back()\">kembali</a>");
+         echo"
+			<script>
+				if(confirm('Password atau Username Salah!')){
+					window.location = 'loginsiswa.php';
+				}else{
+					window.location = 'loginsiswa.php';
+				}
+			</script>
+		 ";
     }
 }else if($op=="out"){
     unset($_SESSION['pengguna']);

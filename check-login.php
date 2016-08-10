@@ -19,7 +19,15 @@ $cek = mysql_query("SELECT * FROM member WHERE nama='$username' AND password='$p
             header("location:user/user-home.php");
         }
 	}else{
-         die("password salah <a href=\"javascript:history.back()\">kembali</a>");
+         echo"
+			<script>
+				if(confirm('Password atau Username Salah!')){
+					window.location = 'loginadmin.php';
+				}else{
+					window.location = 'loginadmin.php';
+				}
+			</script>
+		 ";
     }
 }else if($op=="out"){
     unset($_SESSION['pengguna']);
