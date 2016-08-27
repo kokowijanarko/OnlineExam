@@ -34,6 +34,7 @@ if(isset($_POST['Submit'])){
 			INSERT INTO mapel 
 			(
 				mapel_name, 
+				mapel_concentration, 
 				mapel_pass_score, 
 				mapel_duration,
 				mapel_desc
@@ -41,6 +42,7 @@ if(isset($_POST['Submit'])){
 			VALUES 
 			(
 				"'.$_POST['mapel'].'",
+				"'.$_POST['jurusan'].'",
 				"'.$_POST['nilai_lulus'].'",
 				"'.$_POST['durasi'].'", 
 				"'.$_POST['desc'].'"
@@ -63,7 +65,8 @@ if(isset($_POST['Submit'])){
 			`mapel_name` = "'.$_POST['mapel'].'",
 			`mapel_duration` = "'.$_POST['durasi'].'",
 			`mapel_desc` = "'.$_POST['desc'].'",
-			`mapel_pass_score` = "'.$_POST['nilai_lulus'].'"
+			`mapel_pass_score` = "'.$_POST['nilai_lulus'].'",
+			`mapel_concentration` = "'.$_POST['jurusan'].'"
 			WHERE 
 			`mapel_id` = "'.$_POST['mapel_id'].'"
 		')or die(mysql_error());
@@ -92,6 +95,7 @@ if(!is_null($_GET['id'])){
 	$detail['mapel_desc']='';
 	$detail['mapel_duration']='';
 	$detail['mapel_pass_score']='';
+	$detail['mapel_concentration'] ='';
 }
 
 
@@ -141,7 +145,28 @@ echo"
 if ($_POST['message'] == 'fail') {
     echo '<h3>gagal menambah data!</h3>';
 }
-			
+
+$jurusan = array(
+	array(
+		'id'=>'1',
+		'name'=>'IPA'
+	),
+	array(
+		'id'=>'2',
+		'name'=>'IPS'
+	)
+
+);
+$opt_jurusan ='';
+foreach($jurusan as $val){
+	$cek='';
+	if($detail['mapel_concentration'] == $val['name']){
+		$cek = 'selected';
+	}
+	$opt_jurusan .= '<option val="'. $val['name'] .'" '. $cek .'>'. $val['name'] .'</option>';
+}
+
+	
 echo "
 <form action=\"input_soal_mapel_baru.php\" method=\"post\" id=\"form-area\" style=\"width:700px;\">
 <input value='".$detail['mapel_id']."' type=\"hidden\" name=\"mapel_id\" id=\"form-input\" required=\"required\" size=\"40\" /><br>
@@ -149,6 +174,8 @@ echo "
 <input value='".$detail['mapel_name']."' type=\"text\" name=\"mapel\" id=\"form-input\" required=\"required\" size=\"40\" /><br>
 <div style=\"width:90px\" id=\"form-label\">Nilai Minimal Kelulusan</div>
 <input value='".$detail['mapel_pass_score']."' type=\"text\" name=\"nilai_lulus\" id=\"form-input\" required=\"required\" size=\"40\" /><br>
+<div style=\"width:90px\" id=\"form-label\">Jurusan</div>
+<select name='jurusan' ><option val=''>---Pilih---</option>". $opt_jurusan ."</select><br><br>
 <div style=\"width:90px\" id=\"form-label\">Durasi</div>
 <input  value='".$detail['mapel_duration']."' type=\"number\" name=\"durasi\" id=\"form-input\" required=\"required\" size=\"30\" /> menit<br>
 <div style=\"width:90px\" id=\"form-label\">Deskripsi</div>

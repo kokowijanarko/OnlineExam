@@ -73,6 +73,29 @@ if(!empty($_SESSION['msg'])){
 	$email = $_SESSION['msg']['email'];
 	$telepon = $_SESSION['msg']['telepon'];
 }
+
+$jurusan = array(
+	array(
+		'id'=>'1',
+		'name'=>'IPA'
+	),
+	array(
+		'id'=>'2',
+		'name'=>'IPS'
+	)
+
+);
+$opt_jurusan ='';
+foreach($jurusan as $val){
+	$cek='';
+	if($detail['mapel_concentration'] == $val['name']){
+		$cek = 'selected';
+	}
+	$opt_jurusan .= '<option val="'. $val['name'] .'" '. $cek .'>'. $val['name'] .'</option>';
+}
+
+	
+	
 echo "
 <form action=\"insertuser.php\" method=\"post\" id=\"form-area\" style=\"width:400px;\">
 
@@ -84,9 +107,8 @@ echo "
 <input type=\"text\" name=\"no_peserta\" id=\"form-input\" value= '".$no_peserta."' required=\"required\" size=\"40\" />
 <br />
 
-<div style=\"width:100px\" id=\"form-label\">Jurusan</div>
-<input type=\"text\" name=\"jurusan\" id=\"form-input\" value= '".$jurusan."' required=\"required\" size=\"40\" />
-<br />
+<div style=\"width:90px\" id=\"form-label\">Jurusan</div>
+<select name='jurusan' ><option val=''>---Pilih---</option>". $opt_jurusan ."</select><br><br>
 
 <div style=\"width:100px\" id=\"form-label\">Username</div>
 <input type=\"text\" name=\"username\" id=\"form-input\" value= '".$username."' required=\"required\" size=\"40\" />

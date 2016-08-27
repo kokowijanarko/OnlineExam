@@ -116,7 +116,7 @@ echo'
 		<tr>
 			<td>Nilai</td>
 			<td>:</td>
-			<td>'.$result_identitas['score'].' - <b>('.$conclusion.')</b></td>
+			<td>'.$result_identitas['score'].'</b></td>
 		</tr>
 		
 	</table>

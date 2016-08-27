@@ -32,7 +32,7 @@ else{
 	<div class="collapsed" style="margin-bottom:15px;">
 		<span id="round1">Daftar Soal</span>		
 		<?php
-			$query = mysql_query('SELECT * FROM mapel');
+			$query = mysql_query('SELECT * FROM mapel WHERE mapel_concentration="'. $_SESSION['jurusan'] .'"');
 			//var_dump($query);
 			//$mapel = mysql_fetch_array($query);
 			$sql = mysql_query('SELECT * FROM score WHERE score_user_id ='.$_SESSION['user_id']);

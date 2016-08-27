@@ -80,7 +80,7 @@ $pdf->SetFont('helvetica', '', 10);
 // -----------------------------------------------------------------------------
 $query_conclusion = mysql_query("
 SELECT	
-	(IF(a.`score_score` >= b.`mapel_pass_score`, 'LULUS', 'TIDAK LULUS')) AS conclusion
+	a.`score_score` AS conclusion
 
 FROM score a
 JOIN mapel b ON b.`mapel_id` = a.`score_mapel_id`
@@ -90,17 +90,12 @@ WHERE score_user_id = $id
 ");
 
 
-$conclusion_final=array("LULUS");
-while($row = mysql_fetch_assoc($query_conclusion)){
-	if($row['conclusion'] == "TIDAK LULUS"){
-		array_push($conclusion_final, 'TIDAK LULUS');
-	}
+$conclusion_final=array();
+while($row = mysql_fetch_assoc($query_conclusion)){	
+	array_push($conclusion_final, $row['conclusion']);
 }
-if(in_array('TIDAK LULUS', $conclusion_final)){
-	$hasil_akhir = 'TIDAK LULUS';
-}else{
-	$hasil_akhir = 'LULUS';
-}
+
+$hasil_akhir = array_sum($conclusion_final) / count($conclusion_final);
 //var_dump($hasil_akhir);die;
 $query_identity = mysql_query("SELECT * FROM tuser WHERE id=$id");
 $identity = mysql_fetch_assoc($query_identity);
