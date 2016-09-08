@@ -35,6 +35,8 @@ return confirm('Are You Sure To Delete This Data?');
 </script>
 ";
 
+
+
 echo"
 <div id=\"content\" style=\"height:100%px\">
 <div id=\"title_content\">
@@ -42,15 +44,35 @@ echo"
 
 </div>
 ";
+$key = !empty($_POST['key'])?$_POST['key']:null;
 
+echo'
+<form action="admin-home.php?page=exam_result" method="POST">
+<table>
+	<tr>
+		<td>Cari</td>
+		<td>:</td>
+		<td><input type="text" name="key" value="'. $key .'" placeholder="Cari"></td>		
+		<br />
+		<td><input type="submit" name="submit" value="Cari"></td>
+	</tr>	
+</table>
+</form>
+<br>
+<br>
+';
 
-$p       = new Paging;
-$batas   = 5;
+$p       = new Paging_2;
+$batas   = 10;
 $posisi  = $p->cariPosisi($batas);
-$sql	 = mysql_query("
+
+
+
+$sql_txt ="
 SELECT
 	a.`score_id` AS id_nilai,
 	a.`score_score` AS score,
+	a.`score_insert` AS score_insert,
 	b.`nama` AS nama_siswa,
 	b.`jurusan` AS jurusan,
 	b.`nomor_peserta` AS no_peserta,
@@ -60,7 +82,25 @@ SELECT
 FROM score a
 JOIN tuser b ON b.`id` = a.`score_user_id`
 JOIN mapel c ON c.`mapel_id` = a.`score_mapel_id`
-LIMIT $posisi,$batas") or die(mysql_error());
+WHERE
+	1=1
+	---key---
+ORDER BY a.`score_score` DESC
+LIMIT $posisi,$batas";
+
+$str = '';
+
+if(!empty($key)){
+	$str .= ' AND b.`nomor_peserta` LIKE "%'. $key.'%"
+			OR c.`mapel_name` LIKE "%'. $key .'%"
+			OR b.`nama` LIKE "%'. $key .'%"	
+			OR a.`score_insert` LIKE "%'. $key .'%"	
+			OR b.`jurusan` LIKE "%'. $key .'%"	
+	';
+}
+
+$sql_txt = str_replace('---key---', $str, $sql_txt);
+$sql = mysql_query($sql_txt);
 //var_dump(mysql_fetch_array($sql));die;
 echo '
 	<div class="datagrid">
@@ -72,7 +112,8 @@ echo '
 			<th>NAMA</th>
 			<th>JURUSAN</th>
 			<th>MATA PELAJARAN</th>
-			<th colspan="2">NILAI</th>
+			<th>NILAI</th>
+			<th>TANGGAL UJIAN</th>
 			<th>AKSI</th>			
 		</tr>
 		</thead>
@@ -103,7 +144,7 @@ foreach($data as $r){
 	$sql_detail_mapel = mysql_query("SELECT * FROM mapel where mapel_id=".$r['id_mapel']);
 	$mapel_detail = mysql_fetch_assoc($sql_detail_mapel);
 	$conclusion = $result_identitas['score'] >= $mapel_detail['mapel_pass_score'] ? "LULUS" : "TIDAK LULUS";
-
+	$tgl = date('d-m-Y H:i:s', strtotime($r['score_insert']));
 	echo'
 			<tr>
 				<td>'.$number[$i].'</td>
@@ -112,7 +153,7 @@ foreach($data as $r){
 				<td>'.$r['jurusan'].'</td>
 				<td>'.$r['nama_mapel'].'</td>
 				<td>'.$r['score'].'</td>
-				<td>'.$conclusion.'</td>
+				<td>'.$tgl.'</td>
 				<td>
 					<a href="admin-home.php?page=exam_result&id='.$r['id_nilai'].'" class="action">
 						<img src="images/images_admin/icon_admin_post.png" align="absmiddle" class="img_detail" width="20px" />

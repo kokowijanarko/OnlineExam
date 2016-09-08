@@ -91,7 +91,7 @@ foreach($jurusan as $val){
 	if($detail['mapel_concentration'] == $val['name']){
 		$cek = 'selected';
 	}
-	$opt_jurusan .= '<option val="'. $val['name'] .'" '. $cek .'>'. $val['name'] .'</option>';
+	$opt_jurusan .= '<option value="'. $val['name'] .'" '. $cek .'>'. $val['name'] .'</option>';
 }
 
 	
@@ -108,7 +108,7 @@ echo "
 <br />
 
 <div style=\"width:90px\" id=\"form-label\">Jurusan</div>
-<select name='jurusan' ><option val=''>---Pilih---</option>". $opt_jurusan ."</select><br><br>
+<select name='jurusan' required><option value='xxx'>---Pilih---</option>". $opt_jurusan ."</select><br><br>
 
 <div style=\"width:100px\" id=\"form-label\">Username</div>
 <input type=\"text\" name=\"username\" id=\"form-input\" value= '".$username."' required=\"required\" size=\"40\" />

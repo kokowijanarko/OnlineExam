@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>..:::Login Admin:::..</title>
 <link rel="stylesheet" type="text/css" href="files/style_login.css" />
-<link rel="shorcut icon" href="images/images_admin/img_icon.gif" />
+<link rel="shorcut icon" href="admin/images/images_login/manu.ico" />
 
 <script type="text/javascript">
 function validationlogin(form){
@@ -29,18 +29,18 @@ return (true);
 <div id="main">
 
 <!-- Header -->
-<div id="header"><img src="images/images_login/img_login_header.png" alt="aldyfrz" /></div>
+<div id="header"><img src="images/images_login/img_login_header.png" alt="aldyfrz" /><br><marquee>Silahkan Masukan Username dan Password</blink></marquee></br></div>
 
 <!-- Middle -->
 <div id="middle">
 <form id="form-login" name="login" method="post" action="../check-login.php?op=in" onSubmit="return validationlogin(this)">
   
   <img src="images/images_login/img_login_user.png" align="absmiddle" class="img_user" />
-  <input type="text" name="username" size="29" id="input" />
+  <input type="text" name="username" size="29" id="input" placeholder="USERNAME" />
   <br />
 	
   <img src="images/images_login/img_login_pass.png" align="absmiddle" class="img_pass" />
-  <input type="password" name="password" size="29" id="input" />
+  <input type="password" name="password" size="29" id="input" placeholder="PASSWORD" />
   <br />
   
   <input name="Submit" type="image" value="Submit" src="images/images_login/button_login.png" id="submit" align="absmiddle" />

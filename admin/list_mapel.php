@@ -144,6 +144,7 @@ echo '
 		<tr>
 			<th>NO</th>
 			<th>MATA PELAJARAN</th>
+			<th>JURUSAN</th>
 			<th>DURASI WAKTU UJIAN</th>
 			<th>BATAS NILAI KELULUSAN</th>
 			<th>KETERANGAN</th>
@@ -184,6 +185,7 @@ foreach($data as $r){
 			<tr '.$alt.'>
 				<td>'.$number[$i].'</td>
 				<td>'.$r['mapel_name'].'</td>
+				<td>'.$r['mapel_concentration'].'</td>
 				<td>'.$r['mapel_duration'].'</td>
 				<td>'.$r['mapel_pass_score'].'</td>
 				<td>'.$r['mapel_desc'].'</td>

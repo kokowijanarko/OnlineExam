@@ -14,9 +14,9 @@
 	//var_dump($mapel_id);die;
 	if(empty($soal_id) || $soal_id == ''){
 		$query=mysql_query("INSERT INTO soal 
-		(mapel_id, jawaban, date, pertanyaan, pilihan_a, pilihan_b, pilihan_c, pilihan_d)		
+		(mapel_id, jawaban, pertanyaan, pilihan_a, pilihan_b, pilihan_c, pilihan_d, date)		
 		VALUES
-		('$mapel_id','$keyjab', '$date','$soalt','$pil_1','$pil_2','$pil_3','$pil_4')")or die(mysql_error());	
+		('$mapel_id','$keyjab','$soalt','$pil_1','$pil_2','$pil_3','$pil_4', $date)")or die(mysql_error());	
 		
 		if($query){
 			echo 'javascript:alert("berhasil menambahkan soal!")';

@@ -1,6 +1,6 @@
 <?php
 // Paging Administrator
-class Paging{
+class Paging_2{
 function cariPosisi($batas){
 if(empty($_GET['halaman'])){
 $posisi=0;
@@ -20,8 +20,8 @@ $link_halaman = "";
 if($halaman_aktif > 1){
 $prev = $halaman_aktif-1;
 
-$link_halaman .= "<a href='?page=$_GET[page]&id=$_GET[id]&halaman=1' class='pagging'>&laquo; First</a> 
-                  <a href='?page=$_GET[page]&id=$_GET[id]&halaman=$prev' class='pagging'>&laquo; Previous</a> ";
+$link_halaman .= "<a href='?page=$_GET[page]&halaman=1' class='pagging'>&laquo; First</a> 
+                  <a href='?page=$_GET[page]&halaman=$prev' class='pagging'>&laquo; Previous</a> ";
 }
 else{ 
 $link_halaman .= "<a href='#' class='pagging-off'>&laquo; First</a> <a href='#' class='pagging-off'>&laquo; Prev</a> ";
@@ -32,16 +32,16 @@ $angka = ($halaman_aktif > 3 ? " ... " : " ");
 for ($i=$halaman_aktif-2; $i<$halaman_aktif; $i++){
   if ($i < 1)
   	continue;
-	  $angka .= "<a href='?page=$_GET[page]&id=$_GET[id]&halaman=$i' class='pagging'>$i</a> ";
+	  $angka .= "<a href='?page=$_GET[page]&halaman=$i' class='pagging'>$i</a> ";
   }
 	  $angka .= " <b>$halaman_aktif</b> ";
 	  
     for($i=$halaman_aktif+1; $i<($halaman_aktif+3); $i++){
     if($i > $jmlhalaman)
       break;
-	  $angka .= "<a href='?page=$_GET[page]&id=$_GET[id]&halaman=$i' class='pagging'>$i</a> ";
+	  $angka .= "<a href='?page=$_GET[page]&halaman=$i' class='pagging'>$i</a> ";
     }
-	  $angka .= ($halaman_aktif+2<$jmlhalaman ? " ... <a href='?page=$_GET[page]&id=$_GET[id]&halaman=$jmlhalaman' class='pagging'>
+	  $angka .= ($halaman_aktif+2<$jmlhalaman ? " ... <a href='?page=$_GET[page]&halaman=$jmlhalaman' class='pagging'>
 	  $jmlhalaman</a>  " : " ");
 
 $link_halaman .= "$angka";
@@ -49,8 +49,8 @@ $link_halaman .= "$angka";
 
 if($halaman_aktif < $jmlhalaman){
 	$next = $halaman_aktif+1;
-	$link_halaman .= " <a href=?page=$_GET[page]&id=$_GET[id]&halaman=$next class='pagging'>Next &raquo;</a> 
-                     <a href=?page=$_GET[page]&id=$_GET[id]&halaman=$jmlhalaman' class='pagging'>Last &raquo;</a> ";
+	$link_halaman .= " <a href=?page=$_GET[page]&halaman=$next class='pagging'>Next &raquo;</a> 
+                     <a href=?page=$_GET[page]&halaman=$jmlhalaman' class='pagging'>Last &raquo;</a> ";
 }
 else{
 	$link_halaman .= "<a href='#' class='pagging-off'>Next &raquo;</a> 

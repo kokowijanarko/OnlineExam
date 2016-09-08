@@ -17,7 +17,7 @@ $view_conf = mysql_fetch_array($conf);
 <title>.::MA Nurul Ummah Ujian Online::.</title>
 
 <link rel="stylesheet" type="text/css" href="files/style_admin.css" />
-
+<link rel="shorcut icon" href="manu.ico">
 <script src="files/jquery.js" type="text/javascript"></script>
 <script src="files/sdmenu.js" type="text/javascript"></script>
 <script src="files/tiny_mce.js" type="text/javascript"></script>
@@ -30,6 +30,7 @@ $view_conf = mysql_fetch_array($conf);
 	myMenu.init();
 	};
 </script>
+<link rel="shorcut icon" href="manu.ico" />
 </head>
 
 <body>

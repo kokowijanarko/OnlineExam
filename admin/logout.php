@@ -1,5 +1,5 @@
 <?php
 session_start();
 session_destroy();
-header('location:../loginadmin.php');
+header('location:../admin/index.php');
 ?>

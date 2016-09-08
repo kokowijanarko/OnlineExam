@@ -29,7 +29,7 @@ echo"
 
 
 $p       = new Paging;
-$batas   = 5;
+$batas   = 10;
 $posisi  = $p->cariPosisi($batas);
 $sql	 = mysql_query("
 SELECT

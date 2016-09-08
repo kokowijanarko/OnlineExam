@@ -5,6 +5,7 @@ if(!empty($_SESSION[username]) || !empty($_SESSION[username])) {
 }else{
 	include "../koneksi.php";
 	include "files/pagging.php";
+	include "files/pagging_2.php";
 
 	// Dashboard
 	if($_GET['page']=="home"){

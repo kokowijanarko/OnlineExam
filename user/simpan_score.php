@@ -19,7 +19,8 @@
 				score_score, 
 				score_answer_false, 
 				score_answer_true, 
-				score_answer_empty
+				score_answer_empty,
+				score_insert
 			)
 			values
 			(
@@ -28,7 +29,8 @@
 				'".$point."',
 				'".$salah."',
 				'".$benar."',
-				'".$kososng."'
+				'".$kososng."',
+				NOW()
 			)
 		")or die(mysql_error());
 		

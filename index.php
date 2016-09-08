@@ -17,7 +17,7 @@ $view_conf = mysql_fetch_array($conf);
 <title>.::Registrasi::.</title>
 
 <link rel="stylesheet" type="text/css" href="admin/files/style_admin.css" />
-<link rel="shorcut icon" href="images/images_admin/img_icon.gif" />
+<link rel="shorcut icon" href="manu.ico" />
 <script src="files/jquery.js" type="text/javascript"></script>
 <script src="files/sdmenu.js" type="text/javascript"></script>
 <script src="tinymce/jscripts/tiny_mce/tiny_mce.js" type="text/javascript"></script>

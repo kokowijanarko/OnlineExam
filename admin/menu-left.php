@@ -63,7 +63,7 @@ else{
 	</div>
 	
 	<div class="collapsed" style="margin-bottom:15px;">
-		<span id="round1">Daftar Soal</span>
+		<span id="round1">Arsip Soal</span>
 		<?php
 			$query = mysql_query('SELECT * FROM mapel');
 			//var_dump($query);
@@ -102,6 +102,8 @@ else{
 		<a href="inputuser.php" style="padding-bottom:10px;">
 		<img src="images/images_admin/img_admin_arrow.png" border="0" /> Input user baru
 		</a>
+
+
 	</div>
 
 	<!-- Help & Learn -->

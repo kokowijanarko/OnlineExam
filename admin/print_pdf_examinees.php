@@ -170,8 +170,7 @@ $tbl_hasil .='
 			<th style="text-align:center">JAWABAN KOSONG</th>			
 			<th style="text-align:center">JAWABAN SALAH</th>			
 			<th style="text-align:center">JAWABAN BENAR</th>			
-			<th style="text-align:center">NILAI</th>			
-			<th style="text-align:center">KESIMPULAN</th>
+			<th style="text-align:center">NILAI</th>		
 		</tr>
 ';
 $no=1;
@@ -185,7 +184,6 @@ while($row = mysql_fetch_assoc($query)){
 			<td>'. $row['score_answer_false'] .'</td>
 			<td>'. $row['score_answer_true'] .'</td>
 			<td>'. $row['score_score'] .'</td>
-			<td><strong>'. $row['conclusion'] .'</strong></td>
 		</tr>
 	';
 	$no++;

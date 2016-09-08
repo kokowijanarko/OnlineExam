@@ -11,7 +11,7 @@ error_reporting(0);
 <?php
 $conf 	   = mysql_query("select * from mini_config");
 $view_conf = mysql_fetch_array($conf);
-$query=mysql_query("select * from soal where mapel_id= '".$_GET['id']."'LIMIT 30");
+$query=mysql_query("select * from soal where mapel_id= '".$_GET['id']." AND `date`='". date('Y-m-d')."'LIMIT 30");
 $jumlah_soal=mysql_num_rows($query);
 
 $sql_detail_mapel = mysql_query("SELECT * FROM mapel where mapel_id=".$_GET['id']);
@@ -58,38 +58,11 @@ $time_exam = (intval($time_exam)*60) * 1000;
 			var $this = $(this);
 			if (event.elapsed) {
 				$this.html('Waktu Habis');				
-				// var mapel_id = $('input[name=mapel_id]').val();
-				// var jumlah = $('input[name=jumlah]').val();
-				// var idx = 0;
-				// var id = [];
-				// var jawaban= [];
-				// var params = {
-					// 'mapel_id':mapel_id,
-					// 'jumlah':jumlah,
-					// 'id':id,
-					// 'pilihan':jawaban
-					
-				// };			
-				// var asd = $('#id[1]').val()
-				// console.log(asd);
-				// $('input[name=id]').each(function(index) {
-					// console.log(index);
-					// id.push($(this).val());
-					// $('radio[name:pilihan]').each(function(){
-						// jawaban.push($(this).val());
-					// });					
-					// idx++;
-				// });
-				//console.log(params);
-				// $.Ajax({
-					// url:'nilai.php',
-					// method:'post',
-					// data:params
-				// });
-				//$('#submit-button').removeClass('collapse');
+				
 				$('#form_soal').addClass('collapse');
 			} else {
 				$this.html(event.strftime('Siswa Waktu: <span>%H:%M:%S</span>'));
+				<?php $_SESSION['time'] = $n++;?>
 			}
 		});
 	
@@ -168,7 +141,7 @@ echo'
 
 <table id="form_soal" width="650" border="0" class="font" >
   <?php
-		$hasil=mysql_query("select * from soal where mapel_id= '".$_GET['id']."'LIMIT 30");
+		$hasil=mysql_query("select * from soal where mapel_id= '".$_GET['id']."' AND `date`='". date('Y-m-d')."'LIMIT 30");
 		$jumlah=mysql_num_rows($hasil);
 		
 		// $idx = array();

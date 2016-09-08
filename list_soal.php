@@ -31,7 +31,7 @@ $date = !empty($_POST['date']) ? $_POST['date'] : null;
 
 echo'
 <form action="admin-home.php?page=list_soal&id='. $_GET['id'].'" method="POST">
-<table>
+</table>
 	<tr>
 		<td>Tanggal</td>
 		<td>:</td>
@@ -39,7 +39,7 @@ echo'
 		<br />
 		<td><input type="submit" name="submit" value="Cari"></td>
 	</tr>	
-</table>
+<table>
 </form>
 <br>
 <br>
@@ -64,13 +64,13 @@ echo"
 ";
 
 $p       = new Paging;
-$batas   = 10;
+$batas   = 5;
 $posisi  = $p->cariPosisi($batas);
 $id = $_GET['id'];
-$xxx = "select * from soal where 1=1 ---src--- order by soalid ASC LIMIT $posisi,$batas";
+$xxx = "select * from soal where 1=1 ---src--- group by date order by soalid ASC LIMIT $posisi,$batas";
 $str = '';
 if($_POST['date']){
-	$str .= ' and `date`="'. $date .'"';
+	$str .= ' and date="'. $date .'"';
 }
 if($_GET['id']){
 	$str .= ' AND mapel_id='. $_GET['id'];
@@ -122,7 +122,7 @@ echo "
 </table>
 ";
 
-$jmldata=mysql_num_rows(mysql_query("select * from soal where mapel_id=". $_GET['id']));
+$jmldata=mysql_num_rows(mysql_query("SELECT * FROM tsoal1"));
 $jmlhalaman  = $p->jumlahHalaman($jmldata, $batas);
 $linkHalaman = $p->navHalaman($_GET[halaman], $jmlhalaman);
 echo "<div id=\"pagging\">$linkHalaman</div>";

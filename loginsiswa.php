@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>..::: Login Siswa:::.</title>
 <link rel="stylesheet" type="text/css" href="admin/files/style_login.css" />
+<link rel="shorcut icon" href="manu.ico" />
 
 <?php
 	if(!empty($_GET['msg'])){
