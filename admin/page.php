@@ -30,13 +30,13 @@ if(!empty($_SESSION[username]) || !empty($_SESSION[username])) {
 		}
 	}else if($_GET['page']=="list_soal"){
 		include "list_soal.php";
-	}else if($_GET['page']=="exam_result" && !isset($_GET['id'])){
+	}else if($_GET['page']=="exam_result" && !empty($_GET['id'])){
 		include "list_exam_result.php";
-	}elseif($_GET['page']=="exam_result" && isset($_GET['id'])){
+	}elseif($_GET['page']=="exam_result" && empty($_GET['id'])){
 		include "detail_exam_result.php";
 	}elseif($_GET['page']=="list_examinees"){
 		include "list_examinees.php";
-	}elseif($_GET['page']=="list_examinees" && isset($_GET['id'])){
+	}elseif($_GET['page']=="list_examinees" && empty($_GET['id'])){
 		include "print_pdf_examinees.php";
 	}else{
 		include "home.php";

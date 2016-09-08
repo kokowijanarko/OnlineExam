@@ -41,6 +41,16 @@ $time_exam = (intval($time_exam)*60) * 1000;
 <script src="files/tiny_miniw0rm.js" type="text/javascript"></script>
 <script src="../asset/js/jquery.countdown.js" type="text/javascript"></script>
 
+<?php
+if(!empty($_SESSION[$mapel_detail['mapel_name']])){
+	$time = $_SESSION[$mapel_detail['mapel_name']];
+}else{
+	var_dump('asdads');
+	$date = time() * 1000;
+	$_SESSION[$mapel_detail['mapel_name']] = $date ;
+	$time = $date;
+}
+?>
 
 
 <script type="text/javascript">
@@ -50,9 +60,12 @@ $time_exam = (intval($time_exam)*60) * 1000;
 		myMenu = new SDMenu("my_menu");
 		myMenu.init();
 		//var duration = 5400000;
-		var duration = parseInt('<?php echo $time_exam?>');
+		var duration = parseInt('<?php echo $time_exam?>') ;
 		
-		var fiveSeconds = new Date().getTime() + duration;		
+		var fiveSeconds = <?php echo $time; ?> + duration;		
+		console.log(fiveSeconds);
+		console.log(<?php echo $time; ?>);
+		console.log(new Date().getTime());
 		$('#clock').countdown(fiveSeconds, {elapse: true, finalDate: fiveSeconds})
 		.on('update.countdown', function(event){
 			var $this = $(this);
