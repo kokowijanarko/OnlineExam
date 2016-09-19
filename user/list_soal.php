@@ -144,7 +144,6 @@ echo'
 
 $hasil=mysql_query("select * from soal where mapel_id= '".$_GET['id']."' AND `date`='". date('Y-m-d')."'LIMIT 30");
 $jumlah=mysql_num_rows($hasil);
-var_dump($jumlah);
 if(is_null($jumlah) || $jumlah == 0){
 	echo '
 		<div id="bg_content_welcome">
