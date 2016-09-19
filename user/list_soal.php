@@ -142,6 +142,17 @@ echo'
 <img src="images/images_admin/icon_admin_user.png" align="absmiddle" class="img_title" /> Soal '.$mapel_name.'
 </div>';
 
+$hasil=mysql_query("select * from soal where mapel_id= '".$_GET['id']."' AND `date`='". date('Y-m-d')."'LIMIT 30");
+$jumlah=mysql_num_rows($hasil);
+var_dump($jumlah);
+if(is_null($jumlah) || $jumlah == 0){
+	echo '
+		<div id="bg_content_welcome">
+			<p> Maaf, bukan jadwal ujian !</p>
+			<p> Silakan akses ketika jadwal ujian.</p>
+		</div>
+	';
+}else{
 ?>
 <div id="clock">
 </div>
@@ -154,16 +165,7 @@ echo'
 
 <table id="form_soal" width="650" border="0" class="font" >
   <?php
-		$hasil=mysql_query("select * from soal where mapel_id= '".$_GET['id']."' AND `date`='". date('Y-m-d')."'LIMIT 30");
-		$jumlah=mysql_num_rows($hasil);
 		
-		// $idx = array();
-		// for($i=0; $i<$jumlah; $i++){			
-			// array_push($idx, $i);
-		// }
-		// shuffle($idx);	
-		// var_dump($idx);
-		// die;
 		$urut=0;
 		while($row =mysql_fetch_array($hasil))
 		{
@@ -225,6 +227,7 @@ echo'
 
 
 <?php
+}
 echo"</div>
 ";
 ?>
